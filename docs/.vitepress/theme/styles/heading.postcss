@@ -1,0 +1,24 @@
+/* fix anchor links */
+
+.prose {
+    h1, h2, h3, h4, h5, h6 {
+        @apply scroll-mt-16;
+
+        .header-anchor {
+            @apply opacity-0 transition text-gray-600 absolute -left-0 -translate-x-full pr-1.5;
+        }
+        .header-anchor:hover {
+            @apply underline;
+        }
+    }
+
+    h1:hover, h2:hover, h3:hover {
+        .header-anchor {
+            @apply opacity-100;
+        }
+    }
+
+    .header-anchor {
+        @apply no-underline;
+    }
+}

@@ -1,0 +1,15 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+/* @import './prism.css'; */
+
+@import './code.css';
+
+/* @import './line-numbers.postcss'; */
+
+@import './heading.postcss';
+
+@import './progress.postcss';
+
+@import './scroll.postcss';
