@@ -44,12 +44,16 @@ const internalErrors = computed<
 
 <template>
   <template v-for="field in fields" :key="field.name">
-    <FormFields
+    <div
       v-if="field.type === 'fields'"
-      v-model="model[field.name]"
-      :fields="field.fields"
-      :errors="(internalErrors[field.name] as Record<string, string[]>)"
-    />
+      class="grid grid-cols-1 gap-4 pt-4 mt-2 border-t border-gray-300"
+    >
+      <FormFields
+        v-model="model[field.name]"
+        :fields="field.fields"
+        :errors="(internalErrors[field.name] as Record<string, string[]>)"
+      />
+    </div>
     <FormTextarea
       v-else-if="field.type === 'textarea'"
       v-model="model[field.name]"

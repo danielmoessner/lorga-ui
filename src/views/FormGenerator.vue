@@ -10,8 +10,14 @@ const modalOpen = ref(false);
 
 const fields: FormField[] = [
   {
-    name: "test",
-    label: "Test",
+    name: "test01",
+    label: "Test 01",
+    type: "text",
+    required: true,
+  },
+  {
+    name: "test02",
+    label: "Test 02",
     type: "text",
     required: true,
   },
@@ -20,8 +26,14 @@ const fields: FormField[] = [
     type: "fields",
     fields: [
       {
-        name: "test",
-        label: "Test",
+        name: "test11",
+        label: "Test 11",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "test12",
+        label: "Test 12",
         type: "text",
         required: true,
       },
