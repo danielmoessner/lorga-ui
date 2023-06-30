@@ -2,13 +2,18 @@
   <AlertList :alerts="alerts" @close="close($event)"></AlertList>
   <div class="relative bg-gray-100 w-96 h-96 p-96">
     <Transition
-      enter-active-class="transition-all duration-1000"
+      enter-active-class="absolute transition-all duration-1000"
       enter-from-class="left-10"
       enter-to-class="left-64"
       leave-from-class="left-20"
       leave-to-class="left-32"
+      :class="{ 'left-64': show }"
     >
-      <div v-if="show" class="absolute w-10 h-10 bg-red-500"></div>
+      <div
+        v-if="show"
+        class="absolute w-10 h-10 bg-red-500"
+        :class="{ '': show }"
+      ></div>
     </Transition>
   </div>
   <button type="button" @click="show = !show">click me {{ show }}</button>
