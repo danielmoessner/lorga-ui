@@ -26,9 +26,11 @@ import FormMultiple from "./components/FormMultiple.vue";
 import FormSelect from "./components/FormSelect.vue";
 import FormTextarea from "./components/FormTextarea.vue";
 import FormCombobox from "./components/FormCombobox.vue";
+import FormSearchSelect from "./components/FormSearchSelect.vue";
 
 export {
   FormToggle,
+  FormSearchSelect,
   FormFile,
   FormGenerator,
   FormHelptext,

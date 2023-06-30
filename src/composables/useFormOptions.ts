@@ -1,10 +1,10 @@
-import { computed } from "vue";
+import { Ref, computed } from "vue";
 import { FormOption, FormOptionInput } from "../types/form";
 
-const useFormOptions = (options: FormOptionInput[] | undefined) => {
+const useFormOptions = (options: Ref<FormOptionInput[] | undefined>) => {
   const formOptions = computed<FormOption[]>(() => {
-    if (!options) return [];
-    return options.map((o: FormOptionInput) => {
+    if (!options || !options.value) return [];
+    return options.value.map((o: FormOptionInput) => {
       if (typeof o === "string")
         return {
           name: o,

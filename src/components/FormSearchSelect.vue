@@ -1,30 +1,31 @@
 <script setup lang="ts">
 import { FormOptionInput } from "../types/form";
 import useFormOptions from "../composables/useFormOptions";
-import { computed, ref, watch } from "vue";
+import { computed, ref, toRefs, watch } from "vue";
 import FormLabel from "./FormLabel.vue";
 
 const props = defineProps<{
   label: string;
   helptext?: string;
   modelValue: string | number | undefined;
-  options?: FormOptionInput[];
+  options: FormOptionInput[] | undefined;
   name: string;
   required?: boolean;
 }>();
+const { modelValue, options, name } = toRefs(props);
 
 const emit = defineEmits(["update:modelValue"]);
 
 const model = computed<string | number | undefined>({
   get: () => {
-    return `${props.modelValue}`;
+    return `${modelValue.value}`;
   },
   set: (v: string | number | undefined) => {
     emit("update:modelValue", v);
   },
 });
 
-const { formOptions } = useFormOptions(props.options);
+const { formOptions } = useFormOptions(options);
 
 const search = ref();
 const formOptionsSearch = computed(() => {
@@ -41,7 +42,7 @@ watch(search, () => {
   else model.value = undefined;
 });
 
-const id = computed(() => `form-search-select-${props.name}`);
+const id = computed(() => `form-search-select-${name.value}`);
 </script>
 
 <template>
