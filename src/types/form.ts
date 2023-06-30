@@ -8,7 +8,7 @@ export type FormOptionInput =
     }
   | string;
 
-export interface FormField {
+export interface IRawFormField {
   label: string;
   name: string;
   type:
@@ -51,3 +51,7 @@ export interface FormField {
   room?: string;
   helptext?: string;
 }
+
+export type FormField =
+  | IRawFormField
+  | { type: "fields"; name: string; fields: IRawFormField[] };
