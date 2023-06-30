@@ -35,7 +35,7 @@
 import { defineComponent, PropType } from "vue";
 import ModalFree from "./ModalFree.vue";
 import ButtonNormal from "./ButtonNormal.vue";
-import { JsonModel, RequestFunction } from "../types/shared";
+import { RequestFunction } from "../types/shared";
 import { ICommandError } from "../types";
 
 export default defineComponent({
@@ -50,7 +50,8 @@ export default defineComponent({
       default: "Delete",
     },
     data: {
-      type: Object as PropType<JsonModel | null>,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      type: Object as PropType<Record<string, any>>,
       required: false,
       default: () => null,
     },

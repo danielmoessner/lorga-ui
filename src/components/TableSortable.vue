@@ -102,7 +102,6 @@ import TableHead from "./TableHead.vue";
 import TableRow from "./TableRow.vue";
 import TableHeader from "./TableHeader.vue";
 import { computed, PropType, ref, toRefs } from "vue";
-import { JsonModel } from "../types/shared";
 import CircleLoader from "./CircleLoader.vue";
 import { ChevronUpIcon, ChevronDownIcon } from "@heroicons/vue/20/solid";
 
@@ -114,7 +113,8 @@ const props = defineProps({
     required: true,
   },
   data: {
-    type: Array as PropType<JsonModel[] | null>,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    type: Array as PropType<Record<string, any>[] | null>,
     required: false,
     default: null,
   },
@@ -125,8 +125,8 @@ const props = defineProps({
   },
   getValueFunc: {
     type: Function as PropType<
-      // eslint-disable-next-line no-unused-vars
-      (item: JsonModel, sortKey: string) => string | number
+      // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-explicit-any
+      (item: Record<string, any>, sortKey: string) => string | number
     >,
     required: false,
     default: null,
@@ -180,7 +180,11 @@ const changeSort = (value: string) => {
   emit("update:sortOrder", sortOrder.value);
 };
 
-function getValueDefault(item: JsonModel, key: string): string | number {
+function getValueDefault(
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  item: Record<string, any>,
+  key: string,
+): string | number {
   const val = item[key];
   if (val !== undefined)
     if (typeof val === "number") return val;
@@ -188,7 +192,8 @@ function getValueDefault(item: JsonModel, key: string): string | number {
   return "";
 }
 
-function getValue(item: JsonModel, key: string): string | number {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function getValue(item: Record<string, any>, key: string): string | number {
   if (getValueFunc.value) return getValueFunc.value(item, key);
   return getValueDefault(item, key);
 }
@@ -200,9 +205,11 @@ function compare(val1: string | number, val2: string | number): number {
   return String(val1).localeCompare(String(val2));
 }
 
-function schwartzSort(items: JsonModel[]): JsonModel[] {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function schwartzSort(items: Record<string, any>[]): Record<string, any>[] {
   const modifier = sortOrder.value === "ASC" ? 1 : -1;
-  const tuples: [JsonModel, string | number][] = items.map((i) => [
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const tuples: [Record<string, any>, string | number][] = items.map((i) => [
     i,
     getValue(i, sortKey.value),
   ]);

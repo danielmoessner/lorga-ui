@@ -26,7 +26,7 @@
 import ModalFree from "./ModalFree.vue";
 import FormGenerator from "./FormGenerator.vue";
 import { defineComponent, PropType } from "vue";
-import { JsonModel, RequestFunction } from "../types/shared";
+import { RequestFunction } from "../types/shared";
 import { FormField } from "../types/form";
 
 export default defineComponent({
@@ -50,7 +50,8 @@ export default defineComponent({
       required: true,
     },
     data: {
-      type: Object as PropType<JsonModel | null>,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      type: Object as PropType<Record<string, any>>,
       default: null,
       required: false,
     },

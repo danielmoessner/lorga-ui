@@ -7,7 +7,6 @@
       enter-to-class="left-64"
       leave-from-class="left-20"
       leave-to-class="left-32"
-      :class="{ 'left-64': show }"
     >
       <div
         v-if="show"

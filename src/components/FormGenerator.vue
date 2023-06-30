@@ -33,7 +33,7 @@
 <script lang="ts" setup>
 import ButtonBlue from "./ButtonNormal.vue";
 import { onMounted, ref, toRefs } from "vue";
-import { JsonModel, RequestFunction } from "../types/shared";
+import { RequestFunction } from "../types/shared";
 import { FormField } from "../types/form";
 import { ICommandError } from "../types/error";
 import FormFields from "./FormFields.vue";
@@ -72,20 +72,23 @@ const handleSubmit = () => {
   sendRequest(internalData.value);
 };
 
-const sendRequest = (requestData: JsonModel) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const sendRequest = (requestData: Record<string, any>) => {
   errors.value = {};
   generalErrors.value = [];
 
   request
     .value(requestData)
-    .then((data: JsonModel) => handleSuccess(data))
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    .then((data: Record<string, any>) => handleSuccess(data))
     .catch((error) => handleError(error))
     .finally(() => {
       loading.value = false;
     });
 };
 
-const handleSuccess = (data: JsonModel) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const handleSuccess = (data: Record<string, any>) => {
   emit("success", data);
 };
 
