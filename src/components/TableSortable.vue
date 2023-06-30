@@ -157,7 +157,9 @@ const innerLoading = computed(() => {
   return loading.value || data.value === null;
 });
 
+// eslint-disable-next-line vue/no-dupe-keys
 const sortOrder = ref(sortOrderProp.value);
+// eslint-disable-next-line vue/no-dupe-keys
 const sortKey = ref(sortKeyProp.value);
 
 const changeSortOrder = () => {
