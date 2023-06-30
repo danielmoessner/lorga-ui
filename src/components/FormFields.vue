@@ -11,6 +11,7 @@ import FormCombobox from "./FormCombobox.vue";
 import FormCheckbox from "./FormCheckbox.vue";
 import FormFiles from "./FormFiles.vue";
 import { computed, toRefs } from "vue";
+import FormSearchSelect from "./FormSearchSelect.vue";
 
 const props = defineProps<{
   fields: FormField[];
@@ -123,6 +124,15 @@ const internalErrors = computed<
     />
     <FormCombobox
       v-else-if="field.type === 'combobox'"
+      v-model="model[field.name]"
+      :label="field.label"
+      :name="field.name"
+      :options="field.options"
+      :required="field.required"
+      :helptext="field.helptext"
+    />
+    <FormSearchSelect
+      v-else-if="field.type === 'searchselect'"
       v-model="model[field.name]"
       :label="field.label"
       :name="field.name"

@@ -12,19 +12,6 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
-
-export default defineComponent({
-  props: {
-    label: {
-      type: String,
-      required: true,
-    },
-    required: {
-      type: Boolean,
-      required: true,
-    },
-  },
-});
+<script lang="ts" setup>
+defineProps<{ label: string; required?: boolean }>();
 </script>

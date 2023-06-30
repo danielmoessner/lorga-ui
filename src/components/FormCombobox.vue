@@ -66,7 +66,7 @@
                       {{ option.name }}
                     </span>
                     <span
-                      v-if="selected"
+                      v-show="selected"
                       class="absolute inset-y-0 left-0 flex items-center pl-3"
                       :class="{
                         'text-white': active,
@@ -171,16 +171,16 @@ const formOptions = computed<FormOption[]>(() => {
   });
 });
 
-let filteredOptions = computed<FormOption[]>(() =>
-  query.value === ""
-    ? formOptions.value
-    : formOptions.value.filter((o) =>
-        o.name
-          ?.toLowerCase()
-          .replace(/\s+/g, "")
-          .includes(query.value.toLowerCase().replace(/\s+/g, "")),
-      ),
-);
+let filteredOptions = computed<FormOption[]>(() => {
+  if (query.value === "") return formOptions.value;
+
+  return formOptions.value.filter((o) =>
+    o.name
+      .toLowerCase()
+      .replace(/\s+/g, "")
+      .includes(query.value.toLowerCase().replace(/\s+/g, "")),
+  );
+});
 
 // open on focus
 const button = ref();

@@ -8,6 +8,11 @@ export type FormOptionInput =
     }
   | string;
 
+export type FormOption = {
+  name: string;
+  value: string;
+};
+
 export interface IRawFormField {
   label: string;
   name: string;
@@ -20,6 +25,7 @@ export interface IRawFormField {
     | "file" // form file
     | "files" // form files
     | "combobox" // form combobox
+    | "searchselect" // form searchselect
     | "custom"
     // form input
     | "checkbox"
