@@ -121,4 +121,8 @@ const handleError = (error: ICommandError): Promise<void> => {
   emit("error", error);
   return Promise.reject(error);
 };
+
+defineExpose({
+  internalData,
+});
 </script>
