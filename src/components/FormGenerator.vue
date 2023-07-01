@@ -32,7 +32,7 @@
 
 <script lang="ts" setup>
 import ButtonBlue from "./ButtonNormal.vue";
-import { onMounted, ref, toRefs } from "vue";
+import { onMounted, ref, toRefs, watch } from "vue";
 import { RequestFunction } from "../types/shared";
 import { FormField } from "../types/form";
 import { ICommandError } from "../types/error";
@@ -66,6 +66,14 @@ const loading = ref<boolean>(false);
 onMounted(() => {
   if (data?.value) internalData.value = Object.assign({}, data.value);
 });
+
+watch(
+  internalData,
+  (newValue) => {
+    emit("change", newValue);
+  },
+  { deep: true },
+);
 
 const handleSubmit = () => {
   loading.value = true;
@@ -121,8 +129,4 @@ const handleError = (error: ICommandError): Promise<void> => {
   emit("error", error);
   return Promise.reject(error);
 };
-
-defineExpose({
-  internalData,
-});
 </script>
