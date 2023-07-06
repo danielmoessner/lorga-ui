@@ -20,7 +20,7 @@ const options = [
     id: "d4ea3b90-aed1-488a-b407-b140bbf01cef",
   },
   {
-    anzeige_name: "Max Muster",
+    anzeige_name: "Max Muster Selected",
     id: "66464871-6b15-44e3-acd9-7c3046fa43f8",
   },
   {
@@ -3214,7 +3214,7 @@ const optionsComputed = computed(() => {
   });
 });
 
-const value = ref<string>();
+const value = ref<string>("66464871-6b15-44e3-acd9-7c3046fa43f8");
 </script>
 
 <template>

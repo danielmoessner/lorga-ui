@@ -35,9 +35,9 @@ const formOptionsSearch = computed(() => {
   );
 });
 watch(search, () => {
-  if (!search.value) return;
-  if (formOptionsSearch.value.some((o) => o.value === model.value)) return;
-  if (formOptionsSearch.value.length > 0)
+  if (!search.value) model.value = undefined;
+  else if (formOptionsSearch.value.some((o) => o.value === model.value)) return;
+  else if (formOptionsSearch.value.length > 0)
     model.value = formOptionsSearch.value[0].value;
   else model.value = undefined;
 });
