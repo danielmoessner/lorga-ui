@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import FormGenerator from "../components/FormGenerator.vue";
+import ButtonNormal from "../components/ButtonNormal.vue";
 import { FormField } from "../types/form";
+import { ref } from "vue";
+import ModalCreate from "../components/ModalCreate.vue";
 
-const request = () =>
-  Promise.reject({
-    paramErrors: { test01: ["Error"], nested: { test11: ["Another Error"] } },
-    title: "TITLE",
-  });
+const data = ref({});
+const request = (d) => Promise.resolve().then(() => (data.value = d));
+const modalOpen = ref(false);
 
 const fields: FormField[] = [
   {
@@ -43,7 +43,18 @@ const fields: FormField[] = [
 </script>
 
 <template>
-  <div class="max-w-xl p-20">
-    <FormGenerator :fields="fields" :request="request" />
+  <div>
+    <ButtonNormal kind="action" @click="modalOpen = true">Open</ButtonNormal>
+    <ModalCreate
+      v-model="modalOpen"
+      title="Test"
+      submit="Test"
+      :fields="fields"
+      :request="request"
+    >
+      <template #bottom>
+        {{ data }}
+      </template>
+    </ModalCreate>
   </div>
 </template>

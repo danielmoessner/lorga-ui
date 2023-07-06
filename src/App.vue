@@ -5,5 +5,5 @@
 </template>
 
 <script setup lang="ts">
-import CP1 from "./views/ComboboxPerformance.vue";
+import CP1 from "./views/FormGenerator.vue";
 </script>

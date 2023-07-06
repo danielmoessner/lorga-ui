@@ -50,4 +50,27 @@ describe("form generator", () => {
 
     expect(generator.text()).toContain("Test 12");
   });
+
+  it("shows errors", async () => {
+    const request = () =>
+      Promise.reject({
+        paramErrors: {
+          test01: ["Error01"],
+          nested: { test11: ["Error11"] },
+        },
+        title: "Request Param Error",
+      });
+
+    const generator = mount(FormGenerator, {
+      props: {
+        fields: fields,
+        request: request,
+      },
+    });
+
+    await generator.find("form").trigger("submit");
+
+    expect(generator.text()).toContain("Error01");
+    expect(generator.text()).toContain("Error11");
+  });
 });
