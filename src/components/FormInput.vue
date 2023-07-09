@@ -12,6 +12,7 @@
           :type="type"
           :placeholder="placeholder"
           :step="step"
+          :name="name"
           :min="min"
           :required="required"
           :disabled="disabled"

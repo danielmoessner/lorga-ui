@@ -87,10 +87,29 @@ describe("form generator", () => {
       },
     });
 
-    expect(generator.vm.data).toEqual(data);
+    expect(generator.vm.internalData).toEqual(data);
 
-    generator.vm.data["test1"] = "test1";
+    generator.vm.internalData["test1"] = "test1";
 
-    expect(data["test1"]).toEqual("test1");
+    expect(generator.vm.internalData["test1"]).toEqual("test1");
+  });
+
+  it("updates exposed data", async () => {
+    const request = () => Promise.resolve();
+
+    const data = { test: "test" };
+
+    const generator = mount(FormGenerator, {
+      props: {
+        fields: fields,
+        request: request,
+        data: data,
+      },
+    });
+
+    const input = await generator.find("input");
+    await input.setValue("testInput");
+
+    expect(generator.vm.internalData["test01"]).toEqual("testInput");
   });
 });

@@ -2,18 +2,19 @@
   <ModalFree
     :model-value="modelValue"
     :title="title"
-    @update:model-value="$emit('update:modelValue', $event)"
+    @update:model-value="emit('update:modelValue', $event)"
   >
     <FormGenerator
+      ref="form"
       :fields="fields"
       :data="data"
       :request="request"
       :submit="submit"
       :cancel="cancel"
       :disabled="disabled"
-      @success="$emit('success', $event)"
-      @cancel="$emit('update:modelValue', false)"
-      @change="$emit('change', $event)"
+      @success="emit('success', $event)"
+      @cancel="emit('update:modelValue', false)"
+      @change="emit('change', $event)"
     >
       <template #bottom>
         <slot name="bottom" />
@@ -22,66 +23,63 @@
   </ModalFree>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import ModalFree from "./ModalFree.vue";
 import FormGenerator from "./FormGenerator.vue";
-import { defineComponent, PropType } from "vue";
+import { PropType, ref, toRefs, watch } from "vue";
 import { RequestFunction } from "../types/shared";
 import { FormField } from "../types/form";
 
-export default defineComponent({
-  components: {
-    ModalFree,
-    FormGenerator,
+const props = defineProps({
+  title: {
+    type: String,
+    required: false,
+    default: "",
   },
-  props: {
-    title: {
-      type: String,
-      required: false,
-      default: "",
-    },
-    modelValue: {
-      type: Boolean,
-      required: false,
-      default: false,
-    },
-    fields: {
-      type: Array as PropType<FormField[]>,
-      required: true,
-    },
-    data: {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      type: Object as PropType<Record<string, any>>,
-      default: null,
-      required: false,
-    },
-    submit: {
-      type: String,
-      required: false,
-      default: "Save",
-    },
-    cancel: {
-      type: String,
-      required: false,
-      default: null,
-    },
-    request: {
-      type: Function as PropType<RequestFunction>,
-      required: false,
-      default: null,
-    },
+  modelValue: {
+    type: Boolean,
+    required: false,
+    default: false,
   },
-  emits: ["update:modelValue", "success", "change"],
-  data() {
-    return {
-      disabled: false as boolean,
-    };
+  fields: {
+    type: Array as PropType<FormField[]>,
+    required: true,
   },
-  watch: {
-    modelValue(newValue: boolean) {
-      if (newValue) this.disabled = false;
-      else this.disabled = true;
-    },
+  data: {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    type: Object as PropType<Record<string, any>>,
+    default: null,
+    required: false,
   },
+  submit: {
+    type: String,
+    required: false,
+    default: "Save",
+  },
+  cancel: {
+    type: String,
+    required: false,
+    default: null,
+  },
+  request: {
+    type: Function as PropType<RequestFunction>,
+    required: false,
+    default: null,
+  },
+});
+
+const { modelValue, data } = toRefs(props);
+const emit = defineEmits(["update:modelValue", "success", "change"]);
+
+const disabled = ref<boolean>(false);
+const form = ref<typeof FormGenerator>();
+
+watch(modelValue, (newValue) => {
+  if (newValue) disabled.value = false;
+  else disabled.value = true;
+});
+
+defineExpose({
+  form,
 });
 </script>

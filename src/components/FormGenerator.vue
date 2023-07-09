@@ -131,6 +131,7 @@ const handleError = (error: ICommandError): Promise<void> => {
 };
 
 defineExpose({
-  internalData: data,
+  data: internalData,
+  internalData,
 });
 </script>
