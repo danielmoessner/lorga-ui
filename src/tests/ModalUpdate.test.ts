@@ -66,8 +66,6 @@ describe("modal update", () => {
 
     await modal.vm.$nextTick();
 
-    console.log(modal.vm.$refs);
-
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     modal.vm.form!.data!["test1"] = "test1";
 
