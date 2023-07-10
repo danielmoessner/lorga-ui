@@ -5,6 +5,7 @@
     @update:model-value="$emit('update:modelValue', $event)"
   >
     <FormGenerator
+      ref="form"
       :fields="fields"
       :data="data"
       :request="request"
@@ -74,5 +75,11 @@ const disabled = ref(false);
 watch(modelValue, (newValue: boolean) => {
   if (newValue) disabled.value = false;
   else disabled.value = true;
+});
+
+const form = ref<typeof FormGenerator>();
+
+defineExpose({
+  form,
 });
 </script>
