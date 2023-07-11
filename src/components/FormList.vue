@@ -117,6 +117,7 @@ export default defineComponent({
         this.value[key] = this.value[key - 1];
         this.value[key - 1] = temp;
       }
+      this.change();
     },
     change() {
       this.$emit("update:modelValue", Object.values(this.value));
