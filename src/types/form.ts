@@ -26,6 +26,7 @@ export interface IRawFormField {
     | "files" // form files
     | "combobox" // form combobox
     | "searchselect" // form searchselect
+    | "datalist" // form datalist
     | "custom"
     // form input
     | "checkbox"

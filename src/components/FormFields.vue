@@ -12,6 +12,7 @@ import FormCheckbox from "./FormCheckbox.vue";
 import FormFiles from "./FormFiles.vue";
 import { computed, toRefs } from "vue";
 import FormSearchSelect from "./FormSearchSelect.vue";
+import FormDatalist from "./FormDatalist.vue";
 
 const props = defineProps<{
   fields: FormField[];
@@ -75,6 +76,15 @@ const internalErrors = computed<
         :name="field.name"
         :required="field.required"
         :options="field.options"
+        :helptext="field.helptext"
+      />
+      <FormDatalist
+        v-else-if="field.type === 'datalist'"
+        v-model="model[field.name]"
+        :label="field.label"
+        :name="field.name"
+        :required="field.required"
+        :options="(field.options as string[])"
         :helptext="field.helptext"
       />
       <FormMultiple
