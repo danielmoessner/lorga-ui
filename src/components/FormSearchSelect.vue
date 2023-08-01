@@ -35,11 +35,19 @@ const formOptionsSearch = computed(() => {
   );
 });
 watch(search, () => {
+  console.log(formOptionsSearch.value);
+  console.log(1, !search.value);
+  console.log(
+    2,
+    formOptionsSearch.value.some((o) => o.value === model.value),
+  );
   if (!search.value) model.value = undefined;
   else if (formOptionsSearch.value.some((o) => o.value === model.value)) return;
-  else if (formOptionsSearch.value.length > 0)
+  else if (formOptionsSearch.value.length > 0) {
+    console.log("THIS", formOptionsSearch.value[0].value);
     model.value = formOptionsSearch.value[0].value;
-  else model.value = undefined;
+    console.log("SET", model.value);
+  } else model.value = undefined;
 });
 
 const id = computed(() => `form-search-select-${name.value}`);
@@ -49,6 +57,7 @@ const id = computed(() => `form-search-select-${name.value}`);
   <label :for="id" class="relative block">
     <div>
       <FormLabel :required="required" :label="label" />
+      {{ model }}
     </div>
     <div class="flex items-center">
       <input

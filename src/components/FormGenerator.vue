@@ -10,7 +10,12 @@
           {{ error }}
         </p>
       </div>
-      <FormFields v-model="internalData" :fields="fields" :errors="errors">
+      <FormFields
+        :data="internalData"
+        :fields="fields"
+        :errors="errors"
+        :on-update="onUpdate"
+      >
         <template v-for="(_, name) in $slots" #[name]="slotData">
           <slot :name="name" v-bind="slotData" />
         </template>
@@ -62,6 +67,18 @@ const errors = ref<Record<string, string[]>>({});
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const internalData = ref<Record<string, any>>({});
 const loading = ref<boolean>(false);
+
+const onUpdate = (loc: string[], value: unknown) => {
+  console.log(loc, value);
+  let schema = internalData.value;
+  let len = loc.length;
+  for (let i = 0; i < len - 1; i++) {
+    let elem = loc[i];
+    if (!schema[elem]) schema[elem] = {};
+    schema = schema[elem];
+  }
+  schema[loc[len - 1]] = value;
+};
 
 onMounted(() => {
   if (data?.value) internalData.value = Object.assign({}, data.value);

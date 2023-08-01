@@ -34,8 +34,12 @@ const fields: FormField[] = [
       {
         name: "test12",
         label: "Test 12",
-        type: "text",
+        type: "searchselect",
         required: true,
+        options: [
+          { id: "1", name: "One" },
+          { id: "2", name: "Two" },
+        ],
       },
     ],
   },
