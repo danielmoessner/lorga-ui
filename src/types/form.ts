@@ -61,4 +61,4 @@ export interface IRawFormField {
 
 export type FormField =
   | IRawFormField
-  | { type: "fields"; name: string; fields: IRawFormField[] };
+  | { type: "fields"; name: string; fields: FormField[] };
