@@ -13,7 +13,7 @@
       <FormFields
         :data="internalData"
         :fields="fields"
-        :errors="errors"
+        :get-error="getError"
         :on-update="onUpdate"
       >
         <template v-for="(_, name) in $slots" #[name]="slotData">
@@ -22,12 +22,7 @@
       </FormFields>
       <slot name="bottom" />
       <div class="flex items-center justify-end pt-2 print:hidden">
-        <ButtonBlue
-          v-if="submit"
-          type="submit"
-          :disabled="disabled"
-          :loading="loading"
-        >
+        <ButtonBlue v-if="submit" type="submit" :loading="loading">
           {{ submit }}
         </ButtonBlue>
       </div>
@@ -37,7 +32,7 @@
 
 <script lang="ts" setup>
 import ButtonBlue from "./ButtonNormal.vue";
-import { onMounted, ref, toRefs, watch } from "vue";
+import { onMounted, ref, toRefs } from "vue";
 import { RequestFunction } from "../types/shared";
 import { FormField } from "../types/form";
 import { ICommandError } from "../types/error";
@@ -49,12 +44,10 @@ const props = withDefaults(
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     data?: Record<string, any>;
     submit?: string;
-    disabled?: boolean;
     request: RequestFunction;
   }>(),
   {
     data: () => ({}),
-    disabled: false,
     submit: "Submit",
   },
 );
@@ -63,13 +56,12 @@ const { data, request, fields } = toRefs(props);
 const emit = defineEmits(["success", "error", "cancel", "change"]);
 
 const generalErrors = ref<string[]>([]);
-const errors = ref<Record<string, string[]>>({});
+const errors = ref<ICommandError["paramErrors"]>({});
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const internalData = ref<Record<string, any>>({});
 const loading = ref<boolean>(false);
 
 const onUpdate = (loc: string[], value: unknown) => {
-  console.log(loc, value);
   let schema = internalData.value;
   let len = loc.length;
   for (let i = 0; i < len - 1; i++) {
@@ -78,19 +70,24 @@ const onUpdate = (loc: string[], value: unknown) => {
     schema = schema[elem];
   }
   schema[loc[len - 1]] = value;
+  emit("change", value);
+};
+
+const getError = (loc: string[]): string[] => {
+  let schema: string[] | ICommandError["paramErrors"] = errors.value;
+  let len = loc.length;
+  for (let i = 0; i < len; i++) {
+    let elem = loc[i];
+    if (!schema[elem]) return [];
+    schema = schema[elem];
+  }
+  if (Array.isArray(schema)) return schema;
+  return [];
 };
 
 onMounted(() => {
   if (data?.value) internalData.value = Object.assign({}, data.value);
 });
-
-watch(
-  internalData,
-  (newValue) => {
-    emit("change", newValue);
-  },
-  { deep: true },
-);
 
 const handleSubmit = () => {
   loading.value = true;
@@ -104,16 +101,14 @@ const sendRequest = (requestData: Record<string, any>) => {
 
   request
     .value(requestData)
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    .then((data: Record<string, any>) => handleSuccess(data))
+    .then((data) => handleSuccess(data))
     .catch((error) => handleError(error))
     .finally(() => {
       loading.value = false;
     });
 };
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const handleSuccess = (data: Record<string, any>) => {
+const handleSuccess = (data) => {
   emit("success", data);
 };
 

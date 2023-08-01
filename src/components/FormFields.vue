@@ -17,28 +17,28 @@ import FormDatalist from "./FormDatalist.vue";
 const props = defineProps<{
   fields: FormField[];
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  data: Record<string, any> | undefined;
-  errors: Record<string, string[] | Record<string, string[]>> | undefined;
+  data: Record<string, any> | undefined; // read-only?
+  // eslint-disable-next-line no-unused-vars
+  getError: (loc: string[]) => string[] | undefined;
   // eslint-disable-next-line no-unused-vars
   onUpdate: (loc: string[], value: unknown) => void;
 }>();
-const { errors, onUpdate, data } = toRefs(props);
+const { onUpdate, data } = toRefs(props);
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const internalData = computed<Record<string, any>>(() => {
   return data.value ? data.value : {};
 });
 
-const internalErrors = computed<
-  Record<string, string[] | Record<string, string[]>>
->(() => {
-  if (!errors.value) return {};
-  return errors.value;
-});
-
 const nestedOnUpdate = (field: string) => {
   return (loc: string[], value: unknown) => {
     return onUpdate.value([field, ...loc], value);
+  };
+};
+
+const nestedGetError = (field: string) => {
+  return (loc: string[]) => {
+    return props.getError([field, ...loc]);
   };
 };
 </script>
@@ -50,7 +50,7 @@ const nestedOnUpdate = (field: string) => {
       :data="internalData[field.name]"
       :on-update="nestedOnUpdate(field.name)"
       :fields="field.fields"
-      :errors="(internalErrors[field.name] as Record<string, string[]>)"
+      :get-error="nestedGetError(field.name)"
     />
     <FormTextarea
       v-else-if="field.type === 'textarea'"
@@ -194,10 +194,11 @@ const nestedOnUpdate = (field: string) => {
       @update:model-value="onUpdate([field.name], $event)"
     />
     <p
-      v-if="internalErrors[field.name]"
+      v-for="error in getError([field.name])"
+      :key="error"
       class="text-red-700 text-sm leading-tight ml-1.5 mt-1 whitespace-pre-line"
     >
-      {{ internalErrors[field.name][0] }}
+      {{ error }}
     </p>
   </template>
 </template>
