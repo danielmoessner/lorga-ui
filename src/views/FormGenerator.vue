@@ -4,7 +4,14 @@ import { FormField } from "../types/form";
 
 const request = () =>
   Promise.reject({
-    paramErrors: { test01: ["Error"], nested: { test11: ["Another Error"] } },
+    paramErrors: {
+      test01: ["Error"],
+      nested: {
+        test11: ["Another Error"],
+        test13: ["Error"],
+        test14: ["Error"],
+      },
+    },
     title: "TITLE",
   });
 
@@ -40,6 +47,18 @@ const fields: FormField[] = [
           { id: "1", name: "One" },
           { id: "2", name: "Two" },
         ],
+      },
+      {
+        name: "test13",
+        label: "Test 13",
+        type: "toggle",
+        required: true,
+      },
+      {
+        name: "test14",
+        label: "Test 14",
+        type: "toggle",
+        required: true,
       },
     ],
   },
