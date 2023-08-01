@@ -31,6 +31,16 @@ const fields: FormField[] = [
         type: "text",
         required: true,
       },
+      {
+        name: "test13",
+        type: "searchselect",
+        label: "Test 13",
+        required: true,
+        options: [
+          { id: "1", name: "One" },
+          { id: "2", name: "Two" },
+        ],
+      },
     ],
   },
 ];
@@ -111,5 +121,29 @@ describe("form generator", () => {
     await input.setValue("testInput");
 
     expect(generator.vm.internalData["test01"]).toEqual("testInput");
+  });
+
+  it("updates nested data", async () => {
+    const request = () => Promise.resolve();
+
+    const data = {};
+
+    const generator = mount(FormGenerator, {
+      props: {
+        fields: fields,
+        request: request,
+        data: data,
+      },
+    });
+
+    const input = await generator.find("input[name='test12']");
+    await input.setValue("testInput");
+
+    expect(generator.vm.internalData["nested"]["test12"]).toEqual("testInput");
+
+    const input2 = await generator.find("select[name='test13']");
+    await input2.setValue("1");
+
+    expect("1").toEqual(generator.vm.internalData["nested"]["test13"]);
   });
 });

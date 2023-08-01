@@ -56,11 +56,13 @@ const id = computed(() => `form-search-select-${name.value}`);
       <input
         v-model="search"
         :list="name"
+        :name="`${name}-search`"
         class="inline-block w-full px-3 py-2 placeholder-gray-400 border border-gray-300 shadow-sm appearance-none rounded-l-md focus:outline-none focus:ring-1 focus-within:ring-1 focus-within:ring-formcolor focus-within:border-formcolor focus:ring-formcolor focus:border-formcolor sm:text-sm"
       />
       <select
         :id="id"
         v-model="model"
+        :name="name"
         class="inline-block w-full py-2 pl-3 pr-6 placeholder-gray-400 bg-no-repeat border border-gray-300 shadow-sm appearance-none cursor-pointer rounded-r-md focus:outline-none focus:ring-formcolor focus:border-formcolor focus:ring-1 sm:text-sm"
       >
         <option
