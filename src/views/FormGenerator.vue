@@ -48,6 +48,10 @@ const fields: FormField[] = [
 
 <template>
   <div class="max-w-xl p-20">
-    <FormGenerator :fields="fields" :request="request" />
+    <FormGenerator
+      :fields="fields"
+      :request="request"
+      :data="{ nested: { test12: '1' } }"
+    />
   </div>
 </template>

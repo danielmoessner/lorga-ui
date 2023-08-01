@@ -32,7 +32,7 @@
 
 <script lang="ts" setup>
 import ButtonBlue from "./ButtonNormal.vue";
-import { onMounted, ref, toRefs } from "vue";
+import { ref, toRefs } from "vue";
 import { RequestFunction } from "../types/shared";
 import { FormField } from "../types/form";
 import { ICommandError } from "../types/error";
@@ -85,9 +85,7 @@ const getError = (loc: string[]): string[] => {
   return [];
 };
 
-onMounted(() => {
-  if (data?.value) internalData.value = Object.assign({}, data.value);
-});
+internalData.value = Object.assign({}, data.value);
 
 const handleSubmit = () => {
   loading.value = true;
