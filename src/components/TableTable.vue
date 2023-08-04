@@ -3,7 +3,7 @@
     <div class="-my-2">
       <div class="min-w-full px-0 py-2">
         <div class="overflow-hidden rounded-md shadow">
-          <div class="overflow-auto">
+          <div class="overflow-x-auto overflow-y-hidden">
             <table class="min-w-full divide-y divide-gray-200">
               <slot />
             </table>
