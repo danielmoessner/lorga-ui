@@ -66,8 +66,6 @@ export default function getTailwindConfig(content: string[]) {
         }),
       },
     },
-    plugins: [
-      require("@tailwindcss/typography"),
-    ],
+    plugins: [require("@tailwindcss/typography")],
   };
 }
