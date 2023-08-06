@@ -69,7 +69,7 @@
               name="action"
             />
             <slot v-else :item="dataItem" :name="headItem.key">
-              {{ getValue(dataItem, headItem.key) }}
+              {{ getDisplayValue(dataItem, headItem.key) }}
             </slot>
             <div
               v-if="headItem.key === 'action'"
@@ -131,6 +131,14 @@ const props = defineProps({
     required: false,
     default: null,
   },
+  getDisplayValueFunc: {
+    type: Function as PropType<
+      // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-explicit-any
+      (item: Record<string, any>, sortKey: string) => string | number
+    >,
+    required: false,
+    default: null,
+  },
   sortOrder: {
     type: String,
     required: false,
@@ -149,6 +157,7 @@ const {
   loading,
   data,
   getValueFunc,
+  getDisplayValueFunc,
   sortOrder: sortOrderProp,
   sortKey: sortKeyProp,
 } = toRefs(props);
@@ -192,6 +201,15 @@ function getValueDefault(
     if (typeof val === "number") return val;
     else return String(val);
   return "";
+}
+
+function getDisplayValue(
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  item: Record<string, any>,
+  key: string,
+): string | number {
+  if (getDisplayValueFunc.value) return getDisplayValueFunc.value(item, key);
+  return getValue(item, key);
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
