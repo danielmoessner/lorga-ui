@@ -126,7 +126,7 @@ const props = defineProps({
   getValueFunc: {
     type: Function as PropType<
       // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-explicit-any
-      (item: Record<string, any>, sortKey: string) => string | number
+      (item: Record<string, any>, key: string) => string | number
     >,
     required: false,
     default: null,
@@ -134,7 +134,7 @@ const props = defineProps({
   getDisplayValueFunc: {
     type: Function as PropType<
       // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-explicit-any
-      (item: Record<string, any>, sortKey: string) => string | number
+      (item: Record<string, any>, key: string) => string | number
     >,
     required: false,
     default: null,
