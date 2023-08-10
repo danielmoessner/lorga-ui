@@ -84,6 +84,25 @@ describe("form generator", () => {
     expect(generator.text()).toContain("Error11");
   });
 
+  it("shows title error", async () => {
+    const request = () => Promise.reject({ title: "Command Not Found" });
+
+    const data = { test: "test" };
+
+    const form = mount(FormGenerator, {
+      props: {
+        fields: fields,
+        request: request,
+        data: data,
+        modelValue: true,
+      },
+    });
+
+    await form.find("form").trigger("submit");
+
+    expect(form.text()).toContain("Command Not Found");
+  });
+
   it("exposes the data", async () => {
     const request = () => Promise.resolve();
 

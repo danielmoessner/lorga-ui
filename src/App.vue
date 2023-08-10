@@ -5,5 +5,5 @@
 </template>
 
 <script setup lang="ts">
-import CP1 from "./views/TableSortable.vue";
+import CP1 from "./views/ModalCreate.vue";
 </script>
