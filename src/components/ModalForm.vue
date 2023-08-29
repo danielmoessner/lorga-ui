@@ -4,9 +4,6 @@
     :title="title"
     @update:model-value="$emit('update:modelValue', $event)"
   >
-    <p v-if="$slots.default" class="mb-5 text-sm text-gray-500 break-words">
-      <slot />
-    </p>
     <FormGenerator
       :fields="fields"
       :data="data"
@@ -17,7 +14,11 @@
       @success="$emit('success', $event)"
       @cancel="$emit('update:modelValue', false)"
       @change="$emit('change', $event)"
-    />
+    >
+      <template v-for="(_, name) in $slots" #[name]="slotData">
+        <slot :name="name" v-bind="slotData" />
+      </template>
+    </FormGenerator>
   </ModalFree>
 </template>
 

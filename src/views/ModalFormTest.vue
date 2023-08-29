@@ -20,11 +20,20 @@ const open = ref(true);
 
 const fields: FormField[] = [
   {
-    label: "Force Delete",
+    label: "Options",
     name: "force_delete",
     type: "checkbox",
-    helptext:
-      "If this checkbox is set the content inside the data sheets will be deleted as well.",
+    helptext: "These options add conditions on how to delete the object.",
+    options: [
+      {
+        name: "Force Delete",
+        value: "force_delete",
+      },
+      {
+        name: "Delete Instantly",
+        value: "delete_instantly",
+      },
+    ],
   },
 ];
 </script>

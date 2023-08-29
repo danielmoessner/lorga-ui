@@ -20,18 +20,17 @@
           <slot :name="name" v-bind="slotData" />
         </template>
       </FormFields>
-      <slot name="bottom" />
       <div class="flex items-center justify-end pt-2 print:hidden">
-        <ButtonBlue v-if="submit" type="submit" :loading="loading">
+        <ButtonNormal v-if="submit" type="submit" :loading="loading">
           {{ submit }}
-        </ButtonBlue>
+        </ButtonNormal>
       </div>
     </div>
   </form>
 </template>
 
 <script lang="ts" setup>
-import ButtonBlue from "./ButtonNormal.vue";
+import ButtonNormal from "./ButtonNormal.vue";
 import { ref, toRefs } from "vue";
 import { RequestFunction } from "../types/shared";
 import { FormField } from "../types/form";

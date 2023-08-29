@@ -20,7 +20,7 @@
       </div>
       <div class="ml-3 text-sm">
         <label
-          :for="option.name"
+          :for="`${id}-${index}`"
           class="font-medium text-gray-700 cursor-pointer"
         >
           {{ option.name }}

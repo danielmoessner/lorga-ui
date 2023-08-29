@@ -5,5 +5,5 @@
 </template>
 
 <script setup lang="ts">
-import CP1 from "./views/FormFieldsTest.vue";
+import CP1 from "./views/ModalFormTest.vue";
 </script>
