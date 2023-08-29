@@ -63,8 +63,8 @@ const nestedGetError = (field: string) => {
         :placeholder="field.placeholder"
         @update:model-value="onUpdate([field.name], $event)"
       />
-      <template v-else-if="field.type === 'custom'">
-        <slot name="custom" :data="internalData" />
+      <template v-else-if="field.type === 'slot'">
+        <slot :name="field.name" :data="internalData" />
       </template>
       <FormSelect
         v-else-if="field.type === 'select'"

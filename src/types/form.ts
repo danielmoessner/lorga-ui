@@ -13,23 +13,24 @@ export type FormOption = {
   value: string;
 };
 
-export interface IRawFormField {
+type BaseField = {
   label: string;
   name: string;
+  autocomplete?: string;
+  disabled?: boolean;
+  required?: boolean;
+  placeholder?: string;
+  helptext?: string;
+};
+
+type InputField = BaseField & {
   type:
-    | "multiple" // form multiple
-    | "list" // form list
-    | "select" // form select
     | "textarea" // form textarea
     | "toggle" // form checkbox
     | "file" // form file
     | "files" // form files
-    | "combobox" // form combobox
-    | "searchselect" // form searchselect
-    | "datalist" // form datalist
     | "custom"
     // form input
-    | "checkbox"
     | "button"
     | "color"
     | "date"
@@ -50,15 +51,22 @@ export interface IRawFormField {
     | "time"
     | "url"
     | "week";
-  autocomplete?: string;
-  disabled?: boolean;
-  required?: boolean;
-  placeholder?: string;
-  options?: FormOptionInput[];
-  room?: string;
-  helptext?: string;
-}
+};
 
-export type FormField =
-  | IRawFormField
-  | { type: "fields"; name: string; fields: FormField[] };
+type OptionsField = BaseField & {
+  type:
+    | "multiple" // form multiple
+    | "list" // form list
+    | "select" // form select
+    | "combobox" // form combobox
+    | "searchselect" // form searchselect
+    | "datalist" // form datalist
+    | "checkbox";
+  options: FormOptionInput[];
+};
+
+type NestedField = { type: "fields"; name: string; fields: FormField[] };
+
+type SlotField = { type: "slot"; name: string };
+
+export type FormField = InputField | OptionsField | NestedField | SlotField;

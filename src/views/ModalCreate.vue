@@ -5,7 +5,7 @@ import { ref } from "vue";
 import ModalCreate from "../components/ModalCreate.vue";
 
 const data = ref({});
-const request = (d) => Promise.reject({ title: "Command Not Found" });
+const request = () => Promise.reject({ title: "Command Not Found" });
 const modalOpen = ref(false);
 
 const fields: FormField[] = [
