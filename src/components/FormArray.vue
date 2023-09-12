@@ -42,7 +42,11 @@ const remove = () => {
   return onUpdate.value([name.value], data);
 };
 
-while (internalData.value.length < defaultAmount.value) add();
+const adds = defaultAmount.value - internalData.value.length;
+// call add adds times:
+for (let i = 0; i < adds; i++) {
+  add();
+}
 
 const internalOnUpdate = (index: number) => {
   return (loc: string[], value: unknown) => {
