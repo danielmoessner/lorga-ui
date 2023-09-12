@@ -32,7 +32,7 @@ describe("form fields", () => {
           /* do nothing */
         },
         data: {},
-        getError: () => undefined,
+        getError: () => [],
       },
       slots: {
         slot03: text,

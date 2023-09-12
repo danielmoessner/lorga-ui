@@ -25,6 +25,10 @@ export default defineComponent({
       type: [String, Object],
       default: null,
     },
+    id: {
+      type: String,
+      default: undefined,
+    },
     href: {
       type: String,
       default: null,
@@ -60,6 +64,7 @@ export default defineComponent({
       } else if (this.is === "a") {
         attrs["href"] = this.href;
       }
+      if (this.id) attrs["id"] = this.id;
       return attrs;
     },
     is() {

@@ -36,6 +36,7 @@ import { RequestFunction } from "../types/shared";
 import { FormField } from "../types/form";
 import { ICommandError } from "../types/error";
 import FormFields from "./FormFields.vue";
+import { getNestedValue, setNestedValue } from "../utils/nested";
 
 const props = withDefaults(
   defineProps<{
@@ -60,28 +61,13 @@ const errors = ref<ICommandError["paramErrors"]>({});
 const internalData = ref<Record<string, any>>({});
 const loading = ref<boolean>(false);
 
-const onUpdate = (loc: string[], value: unknown) => {
-  let schema = internalData.value;
-  let len = loc.length;
-  for (let i = 0; i < len - 1; i++) {
-    let elem = loc[i];
-    if (!schema[elem]) schema[elem] = {};
-    schema = schema[elem];
-  }
-  schema[loc[len - 1]] = value;
+const onUpdate = (loc: string[], value: unknown): void => {
+  setNestedValue(internalData.value, loc, value);
   emit("change", value);
 };
 
 const getError = (loc: string[]): string[] => {
-  let schema: string[] | ICommandError["paramErrors"] = errors.value;
-  let len = loc.length;
-  for (let i = 0; i < len; i++) {
-    let elem = loc[i];
-    if (!schema[elem]) return [];
-    schema = schema[elem];
-  }
-  if (Array.isArray(schema)) return schema;
-  return [];
+  return getNestedValue(errors.value, loc);
 };
 
 internalData.value = Object.assign({}, data.value);

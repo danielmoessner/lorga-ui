@@ -28,7 +28,7 @@ const fields: FormField[] = [
       :fields="fields"
       :data="{}"
       :on-update="() => {}"
-      :get-error="() => undefined"
+      :get-error="() => []"
     >
       <template #slot03>
         <div class="bg-red-500">Slot 03</div>

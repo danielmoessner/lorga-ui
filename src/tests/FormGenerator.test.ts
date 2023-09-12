@@ -2,7 +2,7 @@ import { FormGenerator } from "src";
 import { mount } from "@vue/test-utils";
 import { FormField } from "src/types";
 
-const fields: FormField[] = [
+const nestedFields: FormField[] = [
   {
     name: "test01",
     label: "Test 01",
@@ -45,11 +45,42 @@ const fields: FormField[] = [
   },
 ];
 
+const arrayFields: FormField[] = [
+  {
+    name: "wheels",
+    type: "array",
+    fields: [
+      {
+        name: "type",
+        label: "Type",
+        type: "text",
+        required: true,
+      },
+      {
+        name: "size",
+        label: "Size",
+        type: "searchselect",
+        required: true,
+        options: [
+          { id: "1", name: "One" },
+          { id: "2", name: "Two" },
+        ],
+      },
+    ],
+  },
+  {
+    name: "power",
+    label: "Power",
+    type: "number",
+    required: true,
+  },
+];
+
 describe("form generator", () => {
   it("shows nested fields", async () => {
     const generator = mount(FormGenerator, {
       props: {
-        fields: fields,
+        fields: nestedFields,
         request: () => Promise.resolve(),
       },
     });
@@ -73,7 +104,7 @@ describe("form generator", () => {
 
     const generator = mount(FormGenerator, {
       props: {
-        fields: fields,
+        fields: nestedFields,
         request: request,
       },
     });
@@ -91,7 +122,7 @@ describe("form generator", () => {
 
     const form = mount(FormGenerator, {
       props: {
-        fields: fields,
+        fields: nestedFields,
         request: request,
         data: data,
         modelValue: true,
@@ -110,7 +141,7 @@ describe("form generator", () => {
 
     const generator = mount(FormGenerator, {
       props: {
-        fields: fields,
+        fields: nestedFields,
         request: request,
         data: data,
       },
@@ -130,7 +161,7 @@ describe("form generator", () => {
 
     const generator = mount(FormGenerator, {
       props: {
-        fields: fields,
+        fields: nestedFields,
         request: request,
         data: data,
       },
@@ -149,7 +180,7 @@ describe("form generator", () => {
 
     const generator = mount(FormGenerator, {
       props: {
-        fields: fields,
+        fields: nestedFields,
         request: request,
         data: data,
       },
@@ -164,5 +195,72 @@ describe("form generator", () => {
     await input2.setValue("1");
 
     expect("1").toEqual(generator.vm.internalData["nested"]["test13"]);
+  });
+
+  it("shows array fields", async () => {
+    const request = () => Promise.resolve();
+
+    const data = {};
+
+    const generator = await mount(FormGenerator, {
+      props: {
+        fields: arrayFields,
+        request: request,
+        data: data,
+      },
+    });
+
+    const label = await generator.find("label");
+    expect(label.text()).toContain("Type");
+  });
+
+  it("adds array fields", async () => {
+    const request = () => Promise.resolve();
+
+    const data = {};
+
+    const generator = await mount(FormGenerator, {
+      props: {
+        fields: arrayFields,
+        request: request,
+        data: data,
+      },
+    });
+
+    const button = await generator.find("#wheels-add-button");
+    await button.trigger("click");
+
+    expect(generator.vm.internalData["wheels"].length).toEqual(2);
+
+    const removeButton = await generator.find("#wheels-remove-button");
+    await removeButton.trigger("click");
+
+    expect(generator.vm.internalData["wheels"].length).toEqual(1);
+  });
+
+  it("sets array fields data", async () => {
+    const request = () => Promise.resolve();
+
+    const data = {
+      wheels: [
+        {
+          type: "test",
+          size: "1",
+        },
+      ],
+    };
+
+    const generator = await mount(FormGenerator, {
+      props: {
+        fields: arrayFields,
+        request: request,
+        data: data,
+      },
+    });
+
+    const input = await generator.find("input[name='type']");
+    await input.setValue("winter");
+
+    expect(generator.vm.internalData["wheels"][0]["type"]).toEqual("winter");
   });
 });

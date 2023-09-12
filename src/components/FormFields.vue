@@ -13,13 +13,14 @@ import FormFiles from "./FormFiles.vue";
 import { computed, toRefs } from "vue";
 import FormSearchSelect from "./FormSearchSelect.vue";
 import FormDatalist from "./FormDatalist.vue";
+import FormArray from "./FormArray.vue";
 
 const props = defineProps<{
   fields: FormField[];
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   data: Record<string, any> | undefined; // read-only?
   // eslint-disable-next-line no-unused-vars
-  getError: (loc: string[]) => string[] | undefined;
+  getError: (loc: string[]) => string[];
   // eslint-disable-next-line no-unused-vars
   onUpdate: (loc: string[], value: unknown) => void;
 }>();
@@ -66,6 +67,14 @@ const nestedGetError = (field: string) => {
       <template v-else-if="field.type === 'slot'">
         <slot :name="field.name" :data="internalData" />
       </template>
+      <FormArray
+        v-else-if="field.type === 'array'"
+        :data="internalData[field.name]"
+        :name="field.name"
+        :fields="field.fields"
+        :on-update="onUpdate"
+        :get-error="getError"
+      />
       <FormSelect
         v-else-if="field.type === 'select'"
         :model-value="internalData[field.name]"
