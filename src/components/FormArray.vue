@@ -6,19 +6,23 @@ import { cloneDeep } from "lodash";
 import ButtonNormal from "./ButtonNormal.vue";
 import { setNestedValue } from "../utils/nested";
 
-const props = defineProps<{
-  name: string;
-  addButtonText?: string;
-  removeButtonText?: string;
-  fields: FormField[];
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  data: Record<string, any> | undefined; // read-only?
-  // eslint-disable-next-line no-unused-vars
-  getError: (loc: string[]) => string[];
-  // eslint-disable-next-line no-unused-vars
-  onUpdate: (loc: string[], value: unknown) => void;
-}>();
-const { onUpdate, data, name, getError } = toRefs(props);
+const props = withDefaults(
+  defineProps<{
+    name: string;
+    addButtonText?: string;
+    removeButtonText?: string;
+    fields: FormField[];
+    defaultAmount?: number;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    data: Record<string, any> | undefined; // read-only?
+    // eslint-disable-next-line no-unused-vars
+    getError: (loc: string[]) => string[];
+    // eslint-disable-next-line no-unused-vars
+    onUpdate: (loc: string[], value: unknown) => void;
+  }>(),
+  { addButtonText: "Add", removeButtonText: "Remove", defaultAmount: 1 },
+);
+const { onUpdate, data, name, getError, defaultAmount } = toRefs(props);
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const internalData = computed<Record<string, any>[]>(() => {
@@ -38,7 +42,7 @@ const remove = () => {
   return onUpdate.value([name.value], data);
 };
 
-if (internalData.value.length === 0) add();
+while (internalData.value.length < defaultAmount.value) add();
 
 const internalOnUpdate = (index: number) => {
   return (loc: string[], value: unknown) => {
@@ -70,10 +74,10 @@ const internalGetError = (index: number) => {
     </template>
     <div class="flex space-x-5">
       <ButtonNormal :id="`${name}-add-button`" kind="action" @click="add">
-        {{ addButtonText || "Add" }}
+        {{ addButtonText }}
       </ButtonNormal>
       <ButtonNormal :id="`${name}-remove-button`" kind="action" @click="remove">
-        {{ removeButtonText || "Remove" }}
+        {{ removeButtonText }}
       </ButtonNormal>
     </div>
   </div>
