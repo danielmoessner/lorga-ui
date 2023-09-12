@@ -72,6 +72,7 @@ type SlotField = { type: "slot"; name: string };
 type ArrayField = {
   type: "array";
   name: string;
+  defaultAmount?: number;
   fields: FormField[];
   addButtonText?: string;
   removeButtonText?: string;

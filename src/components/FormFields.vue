@@ -74,6 +74,7 @@ const nestedGetError = (field: string) => {
         :add-button-text="field.addButtonText"
         :remove-button-text="field.removeButtonText"
         :fields="field.fields"
+        :default-amount="field.defaultAmount"
         :on-update="onUpdate"
         :get-error="getError"
       />
