@@ -63,7 +63,7 @@ const loading = ref<boolean>(false);
 
 const onUpdate = (loc: string[], value: unknown): void => {
   setNestedValue(internalData.value, loc, value);
-  emit("change", value);
+  emit("change", internalData.value);
 };
 
 const getError = (loc: string[]): string[] => {

@@ -71,6 +71,8 @@ const nestedGetError = (field: string) => {
         v-else-if="field.type === 'array'"
         :data="internalData[field.name]"
         :name="field.name"
+        :add-button-text="field.addButtonText"
+        :remove-button-text="field.removeButtonText"
         :fields="field.fields"
         :on-update="onUpdate"
         :get-error="getError"

@@ -69,7 +69,13 @@ type NestedField = { type: "fields"; name: string; fields: FormField[] };
 
 type SlotField = { type: "slot"; name: string };
 
-type ArrayField = { type: "array"; name: string; fields: FormField[] };
+type ArrayField = {
+  type: "array";
+  name: string;
+  fields: FormField[];
+  addButtonText?: string;
+  removeButtonText?: string;
+};
 
 export type FormField =
   | InputField
