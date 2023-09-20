@@ -1,7 +1,7 @@
 {
   "name": "lorga-ui",
   "description": "Reusable components for your Vue3 frontend.",
-  "version": "1.3.25",
+  "version": "1.3.26",
   "author": "Daniel Mössner",
   "homepage": "https://github.com/danielmoessner/lorga-ui#readme",
   "main": "dist/umd.js",
