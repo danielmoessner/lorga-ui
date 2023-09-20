@@ -29,6 +29,7 @@ type InputField = BaseField & {
     | "toggle" // form checkbox
     | "file" // form file
     | "files" // form files
+    | "list" // form list
     | "custom"
     // form input
     | "button"
@@ -56,7 +57,6 @@ type InputField = BaseField & {
 type OptionsField = BaseField & {
   type:
     | "multiple" // form multiple
-    | "list" // form list
     | "select" // form select
     | "combobox" // form combobox
     | "searchselect" // form searchselect

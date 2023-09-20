@@ -1,6 +1,72 @@
+<script lang="ts" setup>
+import FormLabel from "./FormLabel.vue";
+import FormHelptext from "./FormHelptext.vue";
+import { computed, toRefs } from "vue";
+import {
+  XMarkIcon,
+  PlusIcon,
+  ArrowSmallUpIcon,
+} from "@heroicons/vue/24/outline";
+
+const props = defineProps<{
+  label: string;
+  name: string;
+  modelValue: string[];
+  required?: boolean;
+  helptext?: string;
+}>();
+const { modelValue } = toRefs(props);
+
+const emit = defineEmits(["update:modelValue"]);
+
+type Value = Record<string, string>;
+
+const value = computed<Value>({
+  get: () => {
+    const ret = modelValue.value.reduce(
+      (acc, curr, index) => ({ ...acc, [index + 1]: curr }),
+      {},
+    );
+    return ret;
+  },
+  set: (val: Value) => {
+    emit("update:modelValue", Object.values(val));
+  },
+});
+
+function add() {
+  const key =
+    Math.max(...Object.keys(value.value).map((x) => parseInt(x)), 0) + 1;
+  const newValue = { ...value.value, [key]: "" };
+  value.value = newValue;
+}
+
+function remove(key: string) {
+  const newValue = { ...value.value };
+  delete newValue[key];
+  value.value = newValue;
+}
+
+function up(k: string) {
+  const key = parseInt(k);
+  const newValue = { ...value.value };
+  if (key > 0) {
+    newValue[key] = value.value[key - 1];
+    newValue[key - 1] = value.value[key];
+  }
+  value.value = newValue;
+}
+
+function change() {
+  emit("update:modelValue", Object.values(value.value));
+}
+</script>
+
 <template>
-  <label :for="name" class="relative block">
-    <FormLabel :required="required" :label="label" />
+  <fieldset class="relative block">
+    <legend>
+      <FormLabel :required="required" :label="label" />
+    </legend>
     <div class="flex items-center mt-2 space-x-2">
       <div class="flex flex-col items-start w-full space-y-2">
         <div
@@ -9,7 +75,9 @@
           class="flex items-center w-full space-x-3"
         >
           <input
+            :id="`form-input-${name}-${key}`"
             v-model="value[key]"
+            :name="name"
             type="text"
             class="flex-grow block w-full px-3 py-2 placeholder-gray-400 border border-gray-300 rounded-md shadow-sm appearance-none focus:outline-none focus:ring-formcolor focus:border-formcolor focus:ring-1 sm:text-sm"
             @change="change()"
@@ -39,89 +107,5 @@
       </div>
     </div>
     <FormHelptext :helptext="helptext" />
-  </label>
+  </fieldset>
 </template>
-
-<script lang="ts">
-import FormLabel from "./FormLabel.vue";
-import FormHelptext from "./FormHelptext.vue";
-import { defineComponent, PropType } from "vue";
-import {
-  XMarkIcon,
-  PlusIcon,
-  ArrowSmallUpIcon,
-} from "@heroicons/vue/24/outline";
-
-export default defineComponent({
-  components: {
-    FormHelptext,
-    XMarkIcon,
-    FormLabel,
-    PlusIcon,
-    ArrowSmallUpIcon,
-  },
-  props: {
-    label: {
-      required: true,
-      type: String,
-    },
-    name: {
-      required: true,
-      type: String,
-    },
-    modelValue: {
-      required: false,
-      default: () => [],
-      type: Array as PropType<string[]>,
-    },
-    required: {
-      required: false,
-      default: false,
-      type: Boolean,
-    },
-    helptext: {
-      required: false,
-      default: "",
-      type: String,
-    },
-  },
-  emits: ["update:modelValue"],
-  data() {
-    return {
-      value: {} as { [key: number]: string },
-    };
-  },
-  watch: {
-    modelValue(newValue) {
-      this.value = {};
-      newValue.forEach((element: string, index: number) => {
-        this.value[index] = element;
-      });
-    },
-  },
-  methods: {
-    add() {
-      const key =
-        Math.max(...Object.keys(this.value).map((x) => parseInt(x)), 0) + 1;
-      this.value[key] = "";
-      this.change();
-    },
-    remove(key: string) {
-      delete this.value[key];
-      this.change();
-    },
-    up(k: string) {
-      const key = parseInt(k);
-      if (key > 0) {
-        const temp = this.value[key];
-        this.value[key] = this.value[key - 1];
-        this.value[key - 1] = temp;
-      }
-      this.change();
-    },
-    change() {
-      this.$emit("update:modelValue", Object.values(this.value));
-    },
-  },
-});
-</script>
