@@ -67,7 +67,7 @@
 
 <script lang="ts">
 // eslint-disable-next-line @typescript-eslint/no-explicit-any, no-unused-vars
-type KeyFunction = (_: any) => string | number | boolean | null;
+type KeyFunction = (_: any) => string | number | boolean | null | undefined;
 
 export type IHead = {
   key?: KeyFunction | string;
