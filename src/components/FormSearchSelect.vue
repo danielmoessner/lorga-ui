@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { FormOptionInput } from "../types/form";
 import useFormOptions from "../composables/useFormOptions";
-import { computed, ref, toRefs, watch } from "vue";
+import { computed, onMounted, ref, toRefs, watch } from "vue";
 import FormLabel from "./FormLabel.vue";
 
 const props = defineProps<{
@@ -27,21 +27,41 @@ const model = computed<string | number | undefined>({
 
 const { formOptions } = useFormOptions(options);
 
-const defaultSearch = formOptions.value.find((o) => o.value === model.value);
+const search = ref("");
 
-const search = ref(defaultSearch ? defaultSearch.name : "");
+watch(
+  formOptions,
+  () => {
+    const defaultSearch = formOptions.value.find(
+      (o) => o.value === model.value,
+    );
+    search.value = defaultSearch ? defaultSearch.name : "";
+  },
+  { immediate: true },
+);
+
 const formOptionsSearch = computed(() => {
   if (!search.value) return formOptions.value;
   return formOptions.value.filter((o) =>
     o.name.toLowerCase().includes(search.value.toLowerCase()),
   );
 });
-watch(search, () => {
-  if (!search.value) model.value = undefined;
+
+const updateSearch = (value: string) => {
+  search.value = value;
+  if (!value) return;
   else if (formOptionsSearch.value.some((o) => o.value === model.value)) return;
   else if (formOptionsSearch.value.length > 0) {
     model.value = formOptionsSearch.value[0].value;
   } else model.value = undefined;
+};
+
+const searchInput = ref();
+onMounted(() => {
+  searchInput.value.addEventListener("keydown", (event) => {
+    if (event.key === "Backspace" && search.value === "")
+      model.value = undefined;
+  });
 });
 
 const id = computed(() => `form-search-select-${name.value}`);
@@ -54,10 +74,12 @@ const id = computed(() => `form-search-select-${name.value}`);
     </div>
     <div class="flex items-center">
       <input
-        v-model="search"
+        ref="searchInput"
+        :value="search"
         :list="name"
         :name="`${name}-search`"
-        class="inline-block w-full px-3 py-2 placeholder-gray-400 border border-gray-300 shadow-sm appearance-none rounded-l-md focus:outline-none focus:ring-1 focus-within:ring-1 focus-within:ring-formcolor focus-within:border-formcolor focus:ring-formcolor focus:border-formcolor sm:text-sm"
+        class="inline-block w-full px-3 py-2 placeholder-gray-400 border border-gray-300 shadow-sm appearance-none rounded-l-md focus:outline-none focus:ring-1 focus:z-10 focus-within:ring-1 focus-within:ring-formcolor focus-within:border-formcolor focus:ring-formcolor focus:border-formcolor sm:text-sm"
+        @input="(e) => updateSearch((e.target as HTMLInputElement).value)"
       />
       <select
         :id="id"

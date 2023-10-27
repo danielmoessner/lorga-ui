@@ -5,5 +5,5 @@
 </template>
 
 <script setup lang="ts">
-import CP1 from "./views/FormListTest.vue";
+import CP1 from "./views/FormSearchSelect.vue";
 </script>
