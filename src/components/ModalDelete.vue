@@ -1,21 +1,17 @@
 <template>
   <ModalFree
     :model-value="modelValue"
-    :title="title"
+    :title="internalTitle"
     @update:model-value="$emit('update:modelValue', $event)"
   >
     <div class="mt-2">
       <p class="text-sm text-gray-500 break-words">
-        <slot>
-          Are you sure you want to {{ verb }}
-          {{ data ? data.name : "this data" }}?
-        </slot>
+        <slot>Are you sure you want to delete '{{ internalObjName }}'?</slot>
       </p>
       <p v-if="error" class="mt-2 text-sm text-red-600 whitespace-pre-line">
         {{ error }}
       </p>
     </div>
-
     <div class="flex justify-end mt-4 space-x-3">
       <ButtonNormal
         kind="secondary"
@@ -25,88 +21,67 @@
         Cancel
       </ButtonNormal>
       <ButtonNormal type="button" :loading="loading" @click="deleteClicked()">
-        Yes, {{ verb }}
+        Yes, delete
       </ButtonNormal>
     </div>
   </ModalFree>
 </template>
 
-<script lang="ts">
-import { defineComponent, PropType } from "vue";
+<script setup lang="ts">
 import ModalFree from "./ModalFree.vue";
 import ButtonNormal from "./ButtonNormal.vue";
 import { RequestFunction } from "../types/shared";
 import { ICommandError } from "../types";
+import { computed, ref, toRefs, watch } from "vue";
 
-export default defineComponent({
-  components: {
-    ButtonNormal,
-    ModalFree,
-  },
-  props: {
-    title: {
-      type: String,
-      required: false,
-      default: "Delete",
-    },
-    data: {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      type: Object as PropType<Record<string, any>>,
-      required: false,
-      default: () => null,
-    },
-    modelValue: {
-      type: Boolean,
-      required: false,
-      default: false,
-    },
-    request: {
-      type: Function as PropType<RequestFunction>,
-      required: false,
-      default: null,
-    },
-    verb: {
-      type: String,
-      default: "delete",
-    },
-  },
-  emits: ["update:modelValue", "deleted", "error"],
-  data: function () {
-    return {
-      loading: false,
-      error: null as string | null,
-    };
-  },
-  watch: {
-    modelValue(newValue) {
-      if (newValue) this.error = null;
-    },
-  },
-  methods: {
-    deleteClicked() {
-      this.loading = true;
-      this.error = null;
-      this.request(this.data)
-        .then(() => this.$emit("deleted", this.data))
-        .finally(() => (this.loading = false))
-        .catch(this.handleError);
-    },
-    handleError(error: ICommandError): Promise<void> {
-      if (
-        Object.keys(error.paramErrors).length === 0 &&
-        error.generalErrors.length === 0 &&
-        error.title &&
-        error.title !== "" &&
-        !error.title.includes("Unknown")
-      ) {
-        this.error = error.title;
-        this.$emit("error", error);
-        return Promise.resolve();
-      }
-      this.error = "Unknown Error";
-      this.$emit("error", error);
-      return Promise.reject(error);
-    },
-  },
+const props = defineProps<{
+  title?: string;
+  objName?: string;
+  data: Record<string, string | number | boolean>;
+  modelValue: boolean;
+  request: RequestFunction;
+}>();
+
+const { modelValue, request, data } = toRefs(props);
+
+const internalObjName = computed(
+  () => props.objName || props.data.name || "this data",
+);
+const internalTitle = computed(() => props.title || "Delete");
+
+const emit = defineEmits(["update:modelValue", "deleted", "error"]);
+
+const loading = ref(false);
+const error = ref<string | null>(null);
+
+watch(modelValue, (newValue) => {
+  if (newValue) error.value = null;
 });
+
+function deleteClicked() {
+  loading.value = true;
+  error.value = null;
+  request
+    .value(data.value)
+    .then(() => emit("deleted", data.value))
+    .finally(() => (loading.value = false))
+    .catch(handleError);
+}
+
+function handleError(ce: ICommandError): Promise<void> {
+  if (
+    Object.keys(ce.paramErrors).length === 0 &&
+    ce.generalErrors.length === 0 &&
+    ce.title &&
+    ce.title !== "" &&
+    !ce.title.includes("Unknown")
+  ) {
+    error.value = ce.title;
+    emit("error", ce);
+    return Promise.resolve();
+  }
+  error.value = "Unknown Error";
+  emit("error", ce);
+  return Promise.reject(ce);
+}
 </script>
