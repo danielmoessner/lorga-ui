@@ -21,7 +21,7 @@
         Cancel
       </ButtonNormal>
       <ButtonNormal type="button" :loading="loading" @click="deleteClicked()">
-        Yes, delete
+        {{ submit || "Yes, delete" }}
       </ButtonNormal>
     </div>
   </ModalFree>
@@ -40,6 +40,7 @@ const props = defineProps<{
   data: Record<string, string | number | boolean>;
   modelValue: boolean;
   request: RequestFunction;
+  submit?: string;
 }>();
 
 const { modelValue, request, data } = toRefs(props);
