@@ -92,8 +92,8 @@ const originalAlerts = [
   {
     id: "dasf",
     type: "success",
-    heading: "Attention",
-    message: "Something good happened.",
+    heading: "Test Alert",
+    // message: "Something good happened.",
     created: 12321321321,
   },
   {

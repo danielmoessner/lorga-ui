@@ -4,7 +4,7 @@
     @mouseover="mouseover = true"
     @mouseleave="mouseover = false"
   >
-    <div class="p-4">
+    <div class="p-4" :class="{ 'py-3.5': !alert.message }">
       <div class="flex items-start">
         <div class="flex-shrink-0">
           <CheckCircleIcon
@@ -19,10 +19,16 @@
           />
         </div>
         <div class="flex-1 w-0 ml-3">
-          <p class="text-sm font-medium text-gray-900">
+          <p
+            class="block font-medium text-gray-900"
+            :class="{
+              'text-base': !alert.message,
+              'text-sm': !!alert.message,
+            }"
+          >
             {{ alert.heading }}
           </p>
-          <p class="mt-1 text-sm text-gray-500">
+          <p v-if="alert.message" class="mt-1 text-sm text-gray-500">
             {{ alert.message }}
           </p>
         </div>

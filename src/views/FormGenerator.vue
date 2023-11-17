@@ -1,19 +1,26 @@
 <script setup lang="ts">
+import { ref } from "vue";
 import FormGenerator from "../components/FormGenerator.vue";
 import { FormField } from "../types/form";
 
-const request = () =>
-  Promise.reject({
-    paramErrors: {
-      test01: ["Error"],
-      nested: {
-        test11: ["Another Error"],
-        test13: ["Error"],
-        test14: ["Error"],
-      },
-    },
-    title: "TITLE",
-  });
+const requestData = ref();
+
+const request = (data) => {
+  requestData.value = undefined;
+  requestData.value = data;
+  // Promise.reject({
+  //   paramErrors: {
+  //     test01: ["Error"],
+  //     nested: {
+  //       test11: ["Another Error"],
+  //       test13: ["Error"],
+  //       test14: ["Error"],
+  //     },
+  //   },
+  //   title: "TITLE",
+  // });
+  return Promise.resolve();
+};
 
 const fields: FormField[] = [
   {
@@ -67,10 +74,7 @@ const fields: FormField[] = [
 
 <template>
   <div class="max-w-xl p-20">
-    <FormGenerator
-      :fields="fields"
-      :request="request"
-      :data="{ nested: { test12: '1' } }"
-    />
+    <div>requestData: {{ requestData }}</div>
+    <FormGenerator :fields="fields" :request="request" />
   </div>
 </template>
