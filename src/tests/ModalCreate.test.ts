@@ -1,4 +1,4 @@
-import { ModalCreate } from "src";
+import ModalCreate from "@/components/ModalCreate.vue";
 import { mount } from "@vue/test-utils";
 import { FormField } from "src/types";
 

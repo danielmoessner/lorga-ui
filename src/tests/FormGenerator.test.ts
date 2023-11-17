@@ -1,4 +1,4 @@
-import { FormGenerator } from "src";
+import FormGenerator from "@/components/FormGenerator.vue";
 import { mount } from "@vue/test-utils";
 import { FormField } from "src/types";
 

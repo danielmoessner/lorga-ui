@@ -1,8 +1,8 @@
-import * as path from 'path'
 // import { visualizer } from "rollup-plugin-visualizer";
 import { defineConfig } from "vite";
 import vue from '@vitejs/plugin-vue'
 import dns from "dns";
+import { resolve } from 'path';
 
 // sets localhost as default instead of 127.0.0.1
 dns.setDefaultResultOrder("verbatim");
@@ -15,7 +15,7 @@ export default defineConfig({
   },
   build: {
     lib: {
-      entry: path.resolve(__dirname, "src/index.ts"),
+      entry: resolve(__dirname, "src/index.ts"),
       name: "lorga-ui",
       fileName: (format) => `${format}.js`,
     },
@@ -40,4 +40,9 @@ export default defineConfig({
     vue(), 
     // visualizer({template: 'sunburst'}),
   ],
+  resolve: {
+    alias: {
+      "@": resolve(__dirname, "src"),
+    },
+  },
 });

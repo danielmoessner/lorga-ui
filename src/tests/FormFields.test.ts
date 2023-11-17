@@ -1,4 +1,4 @@
-import FormFields from "../components/FormFields.vue";
+import FormFields from "@/components/FormFields.vue";
 import { FormField } from "../types/form";
 import { mount } from "@vue/test-utils";
 

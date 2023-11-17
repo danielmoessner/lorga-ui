@@ -1,4 +1,4 @@
-import TableSortable from "src/components/TableSortable.vue";
+import TableSortable from "../components/TableSortable.vue";
 import { mount } from "@vue/test-utils";
 
 describe("table sortable", () => {

@@ -30,7 +30,7 @@
 </template>
 
 <script lang="ts" setup>
-import ButtonNormal from "./ButtonNormal.vue";
+import ButtonNormal from "@/components/ButtonNormal.vue";
 import { ref, toRefs } from "vue";
 import { RequestFunction } from "../types/shared";
 import { FormField } from "../types/form";

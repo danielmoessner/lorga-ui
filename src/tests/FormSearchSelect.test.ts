@@ -1,4 +1,4 @@
-import { FormSearchSelect } from "src";
+import FormSearchSelect from "@/components/FormSearchSelect.vue";
 import { mount } from "@vue/test-utils";
 
 describe("form search select", () => {

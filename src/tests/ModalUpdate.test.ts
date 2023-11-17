@@ -1,4 +1,4 @@
-import { ModalUpdate } from "src";
+import ModalUpdate from "@/components/ModalUpdate.vue";
 import { mount } from "@vue/test-utils";
 import { FormField } from "src/types";
 

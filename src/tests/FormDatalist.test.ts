@@ -1,5 +1,6 @@
-import FormDatalistVue from "src/components/FormDatalist.vue";
+import FormDatalistVue from "@/components/FormDatalist.vue";
 import { mount } from "@vue/test-utils";
+import { ref } from "vue";
 
 describe("form datalist", () => {
   it("shows label and helptext", async () => {
@@ -15,17 +16,18 @@ describe("form datalist", () => {
   });
 
   it("updates model value", async () => {
+    const modelValue = ref("initialText");
     const datalist = mount(FormDatalistVue, {
       props: {
         label: "Test 01",
         helptext: "Help text 23",
-        modelValue: "initialText",
-        "onUpdate:modelValue": (e) => datalist.setProps({ modelValue: e }),
+        modelValue: modelValue.value,
+        "onUpdate:modelValue": (e) => (modelValue.value = e),
       },
     });
 
     await datalist.find("input").setValue("newText");
-    expect(datalist.props("modelValue")).toBe("newText");
+    expect(modelValue.value).toBe("newText");
   });
 
   it("includes the options", async () => {

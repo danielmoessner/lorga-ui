@@ -1,5 +1,5 @@
 import { mount } from "@vue/test-utils";
-import FormListVue from "src/components/FormList.vue";
+import FormListVue from "@/components/FormList.vue";
 
 describe("form datalist", () => {
   it("shows label and helptext", async () => {
