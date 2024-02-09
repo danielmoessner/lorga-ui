@@ -16,7 +16,7 @@ const props = withDefaults(
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     data: Record<string, any> | undefined; // read-only?
     // eslint-disable-next-line no-unused-vars
-    getError: (loc: string[]) => string[];
+    getError: (loc: (string | number)[]) => string[];
     // eslint-disable-next-line no-unused-vars
     onUpdate: (loc: string[], value: unknown) => void;
   }>(),
@@ -59,7 +59,7 @@ const internalOnUpdate = (index: number) => {
 };
 
 const internalGetError = (index: number) => {
-  return (loc: string[]): string[] => {
+  return (loc: (string | number)[]): string[] => {
     const newLoc = [name.value, index.toString(), ...loc];
     return getError.value(newLoc);
   };

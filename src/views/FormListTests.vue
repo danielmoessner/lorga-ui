@@ -14,6 +14,7 @@ const peop = ref([]);
         name="person"
         required
         helptext="test"
+        :get-error="() => []"
       />
     </div>
     <div>selected: {{ peop }}</div>
