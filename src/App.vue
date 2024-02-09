@@ -5,5 +5,5 @@
 </template>
 
 <script setup lang="ts">
-import CP1 from "./views/FormGenerator.vue";
+import CP1 from "./views/FormGeneratorList.vue";
 </script>

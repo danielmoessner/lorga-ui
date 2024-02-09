@@ -94,7 +94,7 @@ const nestedGetError = (field: string) => {
         :label="field.label"
         :name="field.name"
         :required="field.required"
-        :options="(field.options as string[])"
+        :options="field.options"
         :helptext="field.helptext"
         @update:model-value="onUpdate([field.name], $event)"
       />

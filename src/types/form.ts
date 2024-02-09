@@ -60,9 +60,13 @@ type OptionsField = BaseField & {
     | "select" // form select
     | "combobox" // form combobox
     | "searchselect" // form searchselect
-    | "datalist" // form datalist
     | "checkbox"; // form checkbox
   options: FormOptionInput[];
+};
+
+type DataListField = BaseField & {
+  type: "datalist";
+  options: string[];
 };
 
 type NestedField = { type: "fields"; name: string; fields: FormField[] };
@@ -83,4 +87,5 @@ export type FormField =
   | OptionsField
   | NestedField
   | SlotField
-  | ArrayField;
+  | ArrayField
+  | DataListField;

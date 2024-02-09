@@ -11,11 +11,12 @@ import {
 const props = defineProps<{
   label: string;
   name: string;
-  modelValue: string[];
+  modelValue: string[] | undefined;
   required?: boolean;
   helptext?: string;
 }>();
 const { modelValue } = toRefs(props);
+console.log(modelValue.value);
 
 const emit = defineEmits(["update:modelValue"]);
 
@@ -23,6 +24,9 @@ type Value = Record<string, string>;
 
 const value = computed<Value>({
   get: () => {
+    if (!modelValue.value) {
+      return {};
+    }
     const ret = modelValue.value.reduce(
       (acc, curr, index) => ({ ...acc, [index + 1]: curr }),
       {},
