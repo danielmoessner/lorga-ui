@@ -66,7 +66,7 @@ const onUpdate = (loc: string[], value: unknown): void => {
   emit("change", internalData.value);
 };
 
-const getError = (loc: string[]): string[] => {
+const getError = (loc: (number | string)[]): string[] => {
   return getNestedValue(errors.value, loc);
 };
 

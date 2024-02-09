@@ -16,7 +16,7 @@ const setNestedValue = (
 
 export type Nested<T> = { [key: string]: T[] | Nested<T> };
 
-function getNestedValue<T>(data: Nested<T>, loc: string[]): T[] {
+function getNestedValue<T>(data: Nested<T>, loc: (string | number)[]): T[] {
   let schema: T[] | Nested<T> = data;
   const len = loc.length;
   for (let i = 0; i < len; i++) {

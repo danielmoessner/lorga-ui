@@ -20,7 +20,7 @@ const props = defineProps<{
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   data: Record<string, any> | undefined; // read-only?
   // eslint-disable-next-line no-unused-vars
-  getError: (loc: string[]) => string[];
+  getError: (loc: (number | string)[]) => string[];
   // eslint-disable-next-line no-unused-vars
   onUpdate: (loc: string[], value: unknown) => void;
 }>();
@@ -38,7 +38,7 @@ const nestedOnUpdate = (field: string) => {
 };
 
 const nestedGetError = (field: string) => {
-  return (loc: string[]) => {
+  return (loc: (string | number)[]) => {
     return props.getError([field, ...loc]);
   };
 };
@@ -115,6 +115,7 @@ const nestedGetError = (field: string) => {
         :label="field.label"
         :helptext="field.helptext"
         :name="field.name"
+        :get-error="nestedGetError(field.name)"
         @update:model-value="onUpdate([field.name], $event)"
       />
       <FormToggle
