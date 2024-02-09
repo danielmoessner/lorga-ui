@@ -2,7 +2,6 @@
 import { ref } from "vue";
 import FormGenerator from "../components/FormGenerator.vue";
 import { FormField } from "../types/form";
-import FormList from "../components/FormList.vue";
 
 const requestData = ref();
 
@@ -30,6 +29,11 @@ const fields: FormField[] = [
     type: "list",
     required: true,
   },
+  {
+    label: "Test 02",
+    name: "test02",
+    type: "singlecheckbox",
+  },
 ];
 </script>
 
@@ -37,16 +41,5 @@ const fields: FormField[] = [
   <div class="max-w-xl p-20">
     <div>requestData: {{ requestData }}</div>
     <FormGenerator :fields="fields" :request="request" :data="{}" />
-  </div>
-  <div>
-    <FormList
-      label="Test 01"
-      name="test01"
-      :model-value="['Custom Value 1', 'Another Value 2']"
-      :get-error="
-        (index: (string | number)[]) =>
-          index[0] === 1 ? ['error on value 2'] : []
-      "
-    />
   </div>
 </template>

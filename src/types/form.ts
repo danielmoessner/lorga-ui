@@ -82,10 +82,18 @@ type ArrayField = {
   removeButtonText?: string;
 };
 
+type SingleCheckboxField = {
+  type: "singlecheckbox";
+  name: string;
+  label: string;
+  helptext?: string;
+};
+
 export type FormField =
   | InputField
   | OptionsField
   | NestedField
   | SlotField
   | ArrayField
-  | DataListField;
+  | DataListField
+  | SingleCheckboxField;

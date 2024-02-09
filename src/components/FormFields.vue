@@ -14,6 +14,7 @@ import { computed, toRefs } from "vue";
 import FormSearchSelect from "./FormSearchSelect.vue";
 import FormDatalist from "./FormDatalist.vue";
 import FormArray from "./FormArray.vue";
+import FormSingleCheckbox from "./FormSingleCheckbox.vue";
 
 const props = defineProps<{
   fields: FormField[];
@@ -147,6 +148,14 @@ const nestedGetError = (field: string) => {
         :disabled="field.disabled"
         :required="field.required"
         :placeholder="field.placeholder"
+        :helptext="field.helptext"
+        @update:model-value="onUpdate([field.name], $event)"
+      />
+      <FormSingleCheckbox
+        v-else-if="field.type === 'singlecheckbox'"
+        :model-value="internalData[field.name]"
+        :label="field.label"
+        :name="field.name"
         :helptext="field.helptext"
         @update:model-value="onUpdate([field.name], $event)"
       />
