@@ -2,7 +2,6 @@
 import { FormField } from "../types/form";
 import FormFields from "./FormFields.vue";
 import { computed, toRefs } from "vue";
-import { cloneDeep } from "lodash";
 import ButtonNormal from "./ButtonNormal.vue";
 import { setNestedValue } from "../utils/nested";
 
@@ -30,14 +29,18 @@ const internalData = computed<Record<string, any>[]>(() => {
   return data.value;
 });
 
+const shallowClone = (value: Record<string, unknown>[]) => {
+  return value.map((v) => ({ ...v }));
+};
+
 const add = () => {
-  const data = cloneDeep(internalData.value);
+  const data = shallowClone(internalData.value);
   data.push({});
   return onUpdate.value([name.value], data);
 };
 
 const remove = () => {
-  const data = cloneDeep(internalData.value);
+  const data = shallowClone(internalData.value);
   data.pop();
   return onUpdate.value([name.value], data);
 };
@@ -50,7 +53,7 @@ for (let i = 0; i < adds; i++) {
 
 const internalOnUpdate = (index: number) => {
   return (loc: string[], value: unknown) => {
-    const data = cloneDeep(internalData.value);
+    const data = shallowClone(internalData.value);
     const objValue = data[index];
     setNestedValue(objValue, loc, value);
     data[index] = objValue;
