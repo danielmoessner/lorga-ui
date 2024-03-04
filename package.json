@@ -43,14 +43,13 @@
     "vue": "3.x",
     "vue-router": "^4.x"
   },
-  "dependencies": {
+  "dependencies": {},
+  "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^7.1.0",
     "eslint": "^8.27.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.1",
-    "eslint-plugin-vue": "^9.8.0"
-  },
-  "devDependencies": {
+    "eslint-plugin-vue": "^9.8.0",
     "@tailwindcss/typography": "^0.5.7",
     "@types/jest": "^29.5.2",
     "@types/node": "^20.3.1",
