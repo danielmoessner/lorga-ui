@@ -54,8 +54,7 @@ const page = computed({
 });
 
 const prev = () => {
-  if (page.value <= 1) page.value = 1;
-  else page.value--;
+  if (page.value > 1) page.value--;
 };
 
 const next = () => {
