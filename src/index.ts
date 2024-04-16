@@ -86,6 +86,11 @@ import ButtonToggle from "./components/ButtonToggle.vue";
 
 export { ButtonNormal, ButtonToggle };
 
+// pagination
+import PaginationBar from "./components/PaginationBar.vue";
+
+export { PaginationBar };
+
 // other
 import CircleLoader from "./components/CircleLoader.vue";
 
