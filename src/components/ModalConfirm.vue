@@ -6,11 +6,11 @@ import ModalFree from "./ModalFree.vue";
 import { ICommandError } from "../types";
 
 const props = defineProps<{
-  title: string;
-  data: { [key: string]: unknown } | null;
+  title?: string;
+  data?: { [key: string]: unknown };
   modelValue: boolean;
   request: RequestFunction;
-  submit: string;
+  submit?: string;
 }>();
 const { data, request } = toRefs(props);
 
@@ -56,7 +56,7 @@ function handleError(e: ICommandError): Promise<void> {
 <template>
   <ModalFree
     :model-value="modelValue"
-    :title="title"
+    :title="title || 'Confirm'"
     @update:model-value="$emit('update:modelValue', $event)"
   >
     <div class="mt-2">
@@ -70,7 +70,7 @@ function handleError(e: ICommandError): Promise<void> {
 
     <div class="flex justify-end mt-4">
       <ButtonNormal type="button" :loading="loading" @click="submitClicked()">
-        {{ submit }}
+        {{ submit || "Confirm" }}
       </ButtonNormal>
     </div>
   </ModalFree>
