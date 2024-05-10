@@ -1,3 +1,58 @@
+<script lang="ts" setup>
+import { RequestFunction } from "../types/shared";
+import { ref, toRefs } from "vue";
+import ButtonNormal from "./ButtonNormal.vue";
+import ModalFree from "./ModalFree.vue";
+import { ICommandError } from "../types";
+
+const props = defineProps<{
+  title: string;
+  data: { [key: string]: unknown } | null;
+  modelValue: boolean;
+  request: RequestFunction;
+  submit: string;
+}>();
+const { data, request } = toRefs(props);
+
+const emit = defineEmits(["update:modelValue", "success", "error"]);
+
+const loading = ref(false);
+const error = ref<string | null>(null);
+
+function submitClicked() {
+  loading.value = true;
+  error.value = null;
+  const r = data.value
+    ? () => request.value(data.value)
+    : () => request.value();
+  r()
+    .then(() => emit("success", data.value))
+    .catch(handleError)
+    .finally(() => {
+      loading.value = false;
+    });
+}
+
+function handleError(e: ICommandError): Promise<void> {
+  if (
+    Object.keys(e.paramErrors).length === 0 &&
+    e.generalErrors.length === 0 &&
+    e.title &&
+    e.title !== "" &&
+    !e.title.includes("Unknown")
+  ) {
+    error.value = e.title;
+    loading.value = false;
+    emit("error", e);
+    return Promise.resolve();
+  }
+  error.value = "Unknown Error";
+  loading.value = false;
+  emit("error", e);
+  return Promise.reject(e);
+}
+</script>
+
 <template>
   <ModalFree
     :model-value="modelValue"
@@ -20,84 +75,3 @@
     </div>
   </ModalFree>
 </template>
-
-<script lang="ts">
-import { RequestFunction } from "../types/shared";
-import { defineComponent, PropType } from "vue";
-import ButtonNormal from "./ButtonNormal.vue";
-import ModalFree from "./ModalFree.vue";
-import { ICommandError } from "../types";
-
-export default defineComponent({
-  components: {
-    ModalFree,
-    ButtonNormal,
-  },
-  props: {
-    title: {
-      type: String,
-      required: false,
-      default: "Titel",
-    },
-    data: {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      type: Object as PropType<{ [key: string]: any } | null>,
-      required: false,
-      default: () => null,
-    },
-    modelValue: {
-      type: Boolean,
-      required: false,
-      default: false,
-    },
-    request: {
-      type: Function as PropType<RequestFunction>,
-      required: false,
-      default: null,
-    },
-    submit: {
-      type: String,
-      default: "Confirm",
-    },
-  },
-  emits: ["update:modelValue", "success", "error"],
-  data: function () {
-    return {
-      loading: false,
-      error: null as string | null,
-    };
-  },
-  methods: {
-    submitClicked() {
-      this.loading = true;
-      const request = this.data
-        ? () => this.request(this.data)
-        : () => this.request();
-      request()
-        .then(() => this.$emit("success", this.data))
-        .catch(this.handleError)
-        .finally(() => {
-          this.loading = false;
-        });
-    },
-    handleError(error: ICommandError): Promise<void> {
-      if (
-        Object.keys(error.paramErrors).length === 0 &&
-        error.generalErrors.length === 0 &&
-        error.title &&
-        error.title !== "" &&
-        !error.title.includes("Unknown")
-      ) {
-        this.error = error.title;
-        this.loading = false;
-        this.$emit("error", error);
-        return Promise.resolve();
-      }
-      this.error = "Unknown Error";
-      this.loading = false;
-      this.$emit("error", error);
-      return Promise.reject(error);
-    },
-  },
-});
-</script>
