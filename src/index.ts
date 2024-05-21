@@ -111,3 +111,11 @@ export { utils };
 import * as types from "./types";
 
 export { types };
+
+/*
+// config
+*/
+
+import { setupConfig, useConfig } from "./config";
+
+export { setupConfig, useConfig };

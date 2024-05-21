@@ -29,8 +29,7 @@
         <template v-for="headItem in computedHead" :key="headItem.name">
           <TableData
             :class="{
-              'md:sticky right-0 text-right space-x-3 md:!border-l-0':
-                headItem.key === 'action',
+              [config.table.tdAction]: headItem.key === 'action',
             }"
           >
             <slot
@@ -85,6 +84,9 @@ import TableRow from "./TableRow.vue";
 import TableHeader from "./TableHeader.vue";
 import { computed, toRefs } from "vue";
 import CircleLoader from "./CircleLoader.vue";
+import { useConfig } from "..";
+
+const { config } = useConfig();
 
 interface ComputedHead {
   key?: string;

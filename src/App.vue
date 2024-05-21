@@ -5,5 +5,8 @@
 </template>
 
 <script setup lang="ts">
-import CP1 from "./views/PaginationTest.vue";
+import { setupConfig } from "./config";
+import CP1 from "./views/TableGenerator.vue";
+
+setupConfig();
 </script>
