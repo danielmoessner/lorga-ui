@@ -185,7 +185,7 @@ let filteredOptions = computed<FormOption[]>(() => {
 // open on focus
 const button = ref();
 const clickOpenButton = () => {
-  button.value.$el.click();
+  // button.value.$el.click();
 };
 const inputClicked = () => {
   clickOpenButton();
