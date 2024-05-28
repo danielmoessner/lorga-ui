@@ -1,5 +1,5 @@
 <template>
-  <td :class="config?.table.td">
+  <td :class="config.table.td">
     <slot />
   </td>
 </template>
