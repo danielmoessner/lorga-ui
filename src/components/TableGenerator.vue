@@ -84,7 +84,7 @@ import TableRow from "./TableRow.vue";
 import TableHeader from "./TableHeader.vue";
 import { computed, toRefs } from "vue";
 import CircleLoader from "./CircleLoader.vue";
-import { useConfig } from "..";
+import { useConfig } from "@/config";
 
 const { config } = useConfig();
 
