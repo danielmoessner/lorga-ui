@@ -2,10 +2,10 @@ import { InjectionKey, inject, provide } from "vue";
 
 export const DEFAULT_CONFIG = {
   table: {
-    th: "",
+    th: "px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase bg-gray-50 whitespace-nowrap",
     td: "px-6 py-4 text-sm text-gray-500 bg-white whitespace-nowrap",
     tdAction: "md:sticky right-0 text-right space-x-3 md:!border-l-0",
-    table: "",
+    table: "min-w-full divide-y divide-gray-200",
   },
 };
 
