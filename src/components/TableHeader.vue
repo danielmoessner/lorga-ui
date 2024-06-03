@@ -1,6 +1,6 @@
 <template>
   <th
-    class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase bg-gray-50 whitespace-nowrap"
+    :class="config.table.th"
   >
     <slot />
   </th>
@@ -8,6 +8,9 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import { useConfig } from "..";
 
 export default defineComponent({});
+
+const { config } = useConfig();
 </script>

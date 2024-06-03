@@ -4,7 +4,7 @@
       <div class="min-w-full px-0 py-2">
         <div class="overflow-hidden rounded-md shadow">
           <div class="overflow-x-auto overflow-y-hidden">
-            <table class="min-w-full divide-y divide-gray-200">
+            <table :class="config.table.table">
               <slot />
             </table>
           </div>
@@ -16,6 +16,9 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import { useConfig } from "..";
 
 export default defineComponent({});
+
+const { config } = useConfig();
 </script>
