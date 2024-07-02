@@ -74,7 +74,11 @@ function change() {
     </legend>
     <div class="flex items-center mt-2 space-x-2">
       <div class="flex flex-col items-start w-full space-y-2">
-        <div v-for="(key, index) in Object.keys(value)" :key="key" class="">
+        <div
+          v-for="(key, index) in Object.keys(value)"
+          :key="key"
+          class="w-full"
+        >
           <div class="flex items-center w-full space-x-3">
             <input
               :id="`form-input-${name}-${key}`"
