@@ -1,11 +1,17 @@
 <template>
+  <ButtonNormal @click="open = true">Open Modal</ButtonNormal>
   <ModalForm
     v-model="open"
     :fields="fields"
     title="Delete Field"
     :request="request"
     submit="Delete"
+    :data="{ select: 'option2' }"
+    @change="change"
   >
+    <template #slot="{ data }">
+      {{ data }}
+    </template>
     This text should show up
   </ModalForm>
 </template>
@@ -14,6 +20,7 @@
 import { FormField } from "../types/form";
 import ModalForm from "../components/ModalForm.vue";
 import { ref } from "vue";
+import ButtonNormal from "@/components/ButtonNormal.vue";
 
 const request = () => Promise.resolve();
 const open = ref(true);
@@ -35,5 +42,22 @@ const fields: FormField[] = [
       },
     ],
   },
+  {
+    label: "Select",
+    name: "select",
+    options: [
+      { name: "Option 1", value: "option1" },
+      { name: "Option 2", value: "option2" },
+    ],
+    type: "select",
+  },
+  {
+    name: "slot",
+    type: "slot",
+  },
 ];
+
+const change = (data) => {
+  console.log(data);
+};
 </script>

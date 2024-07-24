@@ -53,7 +53,7 @@ const props = withDefaults(
 );
 const { data, request, fields } = toRefs(props);
 
-const emit = defineEmits(["success", "error", "cancel", "change"]);
+const emit = defineEmits(["success", "error", "change"]);
 
 const generalErrors = ref<string[]>([]);
 const errors = ref<ICommandError["paramErrors"]>({});
