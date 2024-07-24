@@ -1,5 +1,10 @@
 <script setup lang="ts">
 import ButtonNormal from "@/components/ButtonNormal.vue";
+import { useConfig } from "@/config";
+
+const { overwrite } = useConfig();
+
+overwrite("button.primary.color", "bg-red-500");
 </script>
 
 <template>
