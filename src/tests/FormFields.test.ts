@@ -41,4 +41,26 @@ describe("form fields", () => {
 
     expect(formfields.text()).toContain(text);
   });
+
+  it("shows textarea helpotext", async () => {
+    const formfields = mount(FormFields, {
+      props: {
+        fields: [
+          {
+            label: "Textarea",
+            name: "textarea",
+            type: "textarea",
+            helptext: "This is a help text",
+          },
+        ],
+        onUpdate: () => {
+          /* do nothing */
+        },
+        data: {},
+        getError: () => [],
+      },
+    });
+
+    expect(formfields.text()).toContain("This is a help text");
+  });
 });
