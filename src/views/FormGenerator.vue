@@ -6,7 +6,7 @@ import { FormField } from "../types/form";
 const requestData = ref();
 
 const request = (data) => {
-  requestData.value = undefined;
+  // requestData.value = undefined;
   requestData.value = data;
   // Promise.reject({
   //   paramErrors: {
@@ -19,7 +19,7 @@ const request = (data) => {
   //   },
   //   title: "TITLE",
   // });
-  return Promise.resolve();
+  return Promise.resolve({ request: "success" });
 };
 
 const fields: FormField[] = [
@@ -70,11 +70,15 @@ const fields: FormField[] = [
     ],
   },
 ];
+
+const test = (data, data2) => {
+  console.log(data, data2);
+};
 </script>
 
 <template>
   <div class="max-w-xl p-20">
     <div>requestData: {{ requestData }}</div>
-    <FormGenerator :fields="fields" :request="request" />
+    <FormGenerator :fields="fields" :request="request" @success="test" />
   </div>
 </template>

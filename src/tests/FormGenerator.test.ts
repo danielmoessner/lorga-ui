@@ -263,4 +263,22 @@ describe("form generator", () => {
 
     expect(generator.vm.internalData["wheels"][0]["type"]).toEqual("winter");
   });
+
+  it("sends success event", async () => {
+    const request = () => Promise.resolve({ data: "success" });
+
+    const data = {};
+
+    const generator = await mount(FormGenerator, {
+      props: {
+        fields: arrayFields,
+        request: request,
+        data: data,
+      },
+    });
+
+    await generator.find("form").trigger("submit");
+
+    expect(generator.emitted("success")).toBeTruthy();
+  });
 });

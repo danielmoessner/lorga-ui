@@ -84,15 +84,15 @@ const sendRequest = (requestData: Record<string, any>) => {
 
   request
     .value(requestData)
-    .then((data) => handleSuccess(data))
+    .then((data) => handleSuccess(data, requestData))
     .catch((error) => handleError(error))
     .finally(() => {
       loading.value = false;
     });
 };
 
-const handleSuccess = (data) => {
-  emit("success", data);
+const handleSuccess = (data, requestData) => {
+  emit("success", data, requestData);
 };
 
 const hasVisibleErrors = (
