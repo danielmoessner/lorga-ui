@@ -8,6 +8,7 @@
     submit="Delete"
     :data="{ select: 'option2' }"
     @change="change"
+    @success="success"
   >
     <template #slot="{ data }">
       {{ data }}
@@ -22,7 +23,11 @@ import ModalForm from "../components/ModalForm.vue";
 import { ref } from "vue";
 import ButtonNormal from "@/components/ButtonNormal.vue";
 
-const request = () => Promise.resolve();
+const success = (d1, d2) => {
+  console.log(d1, d2);
+};
+
+const request = () => Promise.resolve({ request: "success" });
 const open = ref(true);
 
 const fields: FormField[] = [
@@ -58,6 +63,6 @@ const fields: FormField[] = [
 ];
 
 const change = (data) => {
-  console.log(data);
+  // console.log(data);
 };
 </script>
