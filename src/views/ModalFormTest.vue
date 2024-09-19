@@ -27,7 +27,13 @@ const success = (d1, d2) => {
   console.log(d1, d2);
 };
 
-const request = () => Promise.resolve({ request: "success" });
+const request = () =>
+  Promise.reject({
+    generalErrors: [],
+    paramErrors: {},
+    title:
+      "1 validation error for Address state   Input should be 'Baden-Württemberg', 'Bayern', 'Berlin', 'Brandenburg', 'Bremen', 'Hamburg', 'Hessen', 'Mecklenburg-Vorpommern', 'Niedersachsen', 'Nordrhein-Westfalen', 'Rheinland-Pfalz', 'Saarland', 'Sachsen', 'Sachsen-Anhalt', 'Schleswig-Holstein', 'Thüringen', 'Unbekannt' or 'Oberösterreich' [type=literal_error, input_value='Unknown', input_type=str]     For further information visit https://errors.pydantic.dev/2.7/v/literal_error",
+  });
 const open = ref(true);
 
 const fields: FormField[] = [

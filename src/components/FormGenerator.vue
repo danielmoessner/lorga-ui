@@ -111,7 +111,7 @@ const hasVisibleErrors = (
 };
 
 const handleError = (error: ICommandError): Promise<void> => {
-  if (!!error.title && error.title !== "" && !error.title.includes("Unknown")) {
+  if (!!error.title && error.title !== "") {
     errors.value = error.paramErrors || {};
     generalErrors.value = error.generalErrors || [];
     if (!hasVisibleErrors(generalErrors.value, errors.value))
