@@ -18,6 +18,7 @@ export default defineConfig({
       entry: resolve(__dirname, "src/index.ts"),
       name: "lorga-ui",
       fileName: (format) => `${format}.js`,
+      cssFileName: 'style',
     },
     rollupOptions: {
       external: [
