@@ -1,3 +1,71 @@
+<script lang="ts" setup generic="T">
+import TableTable from "./TableTable.vue";
+import TableData from "./TableData.vue";
+import TableBody from "./TableBody.vue";
+import TableHead from "./TableHead.vue";
+import TableRow from "./TableRow.vue";
+import TableHeader from "./TableHeader.vue";
+import { computed, toRefs } from "vue";
+import CircleLoader from "./CircleLoader.vue";
+import { useConfig } from "@/config";
+
+const { config } = useConfig();
+
+// eslint-disable-next-line no-unused-vars
+type KeyFunction = (_: T) => string | number | boolean | null | undefined;
+
+type IHead = {
+  key?: KeyFunction | string;
+  name: string;
+  fn?: KeyFunction;
+}[];
+
+interface ComputedHead {
+  key?: string;
+  name: string;
+  fn: KeyFunction;
+}
+
+const props = defineProps<{
+  head: IHead;
+  data?: T[] | undefined | null;
+  loading?: boolean;
+  showTotal?: boolean;
+}>();
+
+const { data, loading, head } = toRefs(props);
+
+const computedHead = computed(() => {
+  const ch: ComputedHead[] = [];
+  head.value.forEach((item) => {
+    let key: string | undefined = undefined;
+    let fn: KeyFunction;
+    if (typeof item.key === "string") key = item.key;
+    if (item.fn) {
+      fn = item.fn;
+      if (typeof item.key === "function")
+        throw new Error("key of :head prop needs to be a string if fn is set");
+    } else if (item.key && typeof item.key === "function") {
+      fn = item.key;
+    } else if (item.key && typeof item.key === "string") {
+      fn = (o) => o[item.key as string] || "";
+    } else {
+      throw new Error(":head prop needs to set key or fn");
+    }
+    ch.push({
+      key: key,
+      name: item.name,
+      fn: fn,
+    });
+  });
+  return ch;
+});
+
+const innerLoading = computed(() => {
+  return loading?.value || !data?.value;
+});
+</script>
+
 <template>
   <TableTable>
     <TableHead>
@@ -63,73 +131,3 @@
     </TableBody>
   </TableTable>
 </template>
-
-<script lang="ts">
-// eslint-disable-next-line @typescript-eslint/no-explicit-any, no-unused-vars
-type KeyFunction = (_: any) => string | number | boolean | null | undefined;
-
-export type IHead = {
-  key?: KeyFunction | string;
-  name: string;
-  fn?: KeyFunction;
-}[];
-</script>
-
-<script lang="ts" setup generic="T">
-import TableTable from "./TableTable.vue";
-import TableData from "./TableData.vue";
-import TableBody from "./TableBody.vue";
-import TableHead from "./TableHead.vue";
-import TableRow from "./TableRow.vue";
-import TableHeader from "./TableHeader.vue";
-import { computed, toRefs } from "vue";
-import CircleLoader from "./CircleLoader.vue";
-import { useConfig } from "@/config";
-
-const { config } = useConfig();
-
-interface ComputedHead {
-  key?: string;
-  name: string;
-  fn: KeyFunction;
-}
-
-const props = defineProps<{
-  head: IHead;
-  data?: T[] | undefined | null;
-  loading?: boolean;
-  showTotal?: boolean;
-}>();
-
-const { data, loading, head } = toRefs(props);
-
-const computedHead = computed(() => {
-  const ch: ComputedHead[] = [];
-  head.value.forEach((item) => {
-    let key: string | undefined = undefined;
-    let fn: KeyFunction;
-    if (typeof item.key === "string") key = item.key;
-    if (item.fn) {
-      fn = item.fn;
-      if (typeof item.key === "function")
-        throw new Error("key of :head prop needs to be a string if fn is set");
-    } else if (item.key && typeof item.key === "function") {
-      fn = item.key;
-    } else if (item.key && typeof item.key === "string") {
-      fn = (o) => o[item.key as string] || "";
-    } else {
-      throw new Error(":head prop needs to set key or fn");
-    }
-    ch.push({
-      key: key,
-      name: item.name,
-      fn: fn,
-    });
-  });
-  return ch;
-});
-
-const innerLoading = computed(() => {
-  return loading?.value || !data?.value;
-});
-</script>

@@ -57,9 +57,7 @@ export {
 // table
 import TableBody from "./components/TableBody.vue";
 import TableData from "./components/TableData.vue";
-import TableGenerator, {
-  type IHead as ITableGeneratorHead,
-} from "./components/TableGenerator.vue";
+import TableGenerator from "./components/TableGenerator.vue";
 import TableHead from "./components/TableHead.vue";
 import TableHeader from "./components/TableHeader.vue";
 import TablePagination from "./components/TablePagination.vue";
@@ -71,7 +69,6 @@ export {
   TableBody,
   TableData,
   TableGenerator,
-  ITableGeneratorHead,
   TableHead,
   TableHeader,
   TablePagination,
