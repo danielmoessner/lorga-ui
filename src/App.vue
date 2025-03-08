@@ -6,7 +6,7 @@
 
 <script setup lang="ts">
 import { setupConfig } from "./config";
-import CP1 from "./views/ModalFormTest.vue";
+import CP1 from "./views/TableGenerator.vue";
 
 setupConfig();
 </script>

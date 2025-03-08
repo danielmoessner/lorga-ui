@@ -75,7 +75,7 @@ export type IHead = {
 }[];
 </script>
 
-<script lang="ts" setup>
+<script lang="ts" setup generic="T">
 import TableTable from "./TableTable.vue";
 import TableData from "./TableData.vue";
 import TableBody from "./TableBody.vue";
@@ -96,8 +96,7 @@ interface ComputedHead {
 
 const props = defineProps<{
   head: IHead;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  data?: any[] | undefined | null;
+  data?: T[] | undefined | null;
   loading?: boolean;
   showTotal?: boolean;
 }>();
