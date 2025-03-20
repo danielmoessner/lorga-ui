@@ -11,9 +11,10 @@ const useFormOptions = (options: Ref<FormOptionInput[] | undefined>) => {
           value: o,
         };
       else {
-        let value = "-";
-        if (o.value) value = String(o.value);
-        else if (o.id) value = String(o.id);
+        let value: string | undefined | number | null | boolean = null;
+        if (Object.hasOwn(o, "value")) value = o.value;
+        else if (Object.hasOwn(o, "id")) value = o.id;
+        else if (Object.hasOwn(o, "uuid")) value = o.uuid;
         return {
           name: o.name || "-",
           value: value,

@@ -25,10 +25,9 @@
 <script lang="ts" setup>
 import FormLabel from "./FormLabel.vue";
 import FormHelptext from "./FormHelptext.vue";
-import { computed } from "vue";
-import { FormOptionInput } from "../types/form";
-
-type FormOption = { name: string; value: string | null | undefined };
+import { computed, defineModel, toRef } from "vue";
+import { FormOption, FormOptionInput } from "../types/form";
+import useFormOptions from "@/composables/useFormOptions";
 
 const props = defineProps<{
   label?: string;
@@ -39,44 +38,15 @@ const props = defineProps<{
   required?: boolean;
 }>();
 
-const emit = defineEmits(["update:modelValue"]);
-
 const style = {
   backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`,
   backgroundPosition: "right 0.5rem center",
   backgroundSize: "1.5em 1.5em",
 };
 
-const model = computed({
-  get() {
-    if (props.modelValue) return props.modelValue;
-    return null;
-  },
-  set(newValue: string | boolean | null) {
-    emit("update:modelValue", newValue);
-  },
-});
+const model = defineModel<string | boolean | null | undefined>();
 
-const formOptions = computed<FormOption[]>(() => {
-  if (!props.options) return [];
-  return props.options.map((o: FormOptionInput) => {
-    if (typeof o === "string")
-      return {
-        name: o,
-        value: o,
-      };
-    else {
-      let value: string | undefined = undefined;
-      if (o.value) value = String(o.value);
-      else if (o.id) value = String(o.id);
-      else if (o.uuid) value = String(o.uuid);
-      return {
-        name: o.name || "-",
-        value: value,
-      };
-    }
-  });
-});
+const { formOptions } = useFormOptions(toRef(props.options));
 
 const internalOptions = computed<FormOption[]>(() => {
   if (props.required) return formOptions.value;

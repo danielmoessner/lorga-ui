@@ -2,7 +2,7 @@
 import FormSelect from "@/components/FormSelect.vue";
 import { ref } from "vue";
 
-const year = ref(new Date().getFullYear());
+const year = ref("");
 
 const years = [
   { name: "Year: All", value: "" },

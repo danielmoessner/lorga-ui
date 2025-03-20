@@ -1,7 +1,7 @@
 export type FormOptionInput =
   | {
       name?: string;
-      value?: string | number;
+      value?: string | number | null;
       id?: number | string;
       uuid?: string;
       required?: boolean;
@@ -10,7 +10,7 @@ export type FormOptionInput =
 
 export type FormOption = {
   name: string;
-  value: string;
+  value: string | null | undefined | number | boolean;
 };
 
 type BaseField = {
