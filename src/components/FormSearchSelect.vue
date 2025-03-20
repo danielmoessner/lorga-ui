@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { FormOptionInput } from "../types/form";
+import { FormOption, FormOptionInput } from "../types/form";
 import useFormOptions from "../composables/useFormOptions";
 import { computed, onMounted, ref, toRefs, watch } from "vue";
 import FormLabel from "./FormLabel.vue";
@@ -16,11 +16,11 @@ const { modelValue, options, name } = toRefs(props);
 
 const emit = defineEmits(["update:modelValue"]);
 
-const model = computed<string | number | undefined>({
+const model = computed<FormOption["value"]>({
   get: () => {
     return `${modelValue.value}`;
   },
-  set: (v: string | number | undefined) => {
+  set: (v: FormOption["value"]) => {
     emit("update:modelValue", v);
   },
 });
@@ -89,7 +89,7 @@ const id = computed(() => `form-search-select-${name.value}`);
       >
         <option
           v-for="option in formOptionsSearch"
-          :key="option.value"
+          :key="String(option.value)"
           :value="option.value"
         >
           {{ option.name }}
