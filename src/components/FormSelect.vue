@@ -1,7 +1,7 @@
 <template>
   <label :for="name" class="relative block">
-    <FormLabel :required="required" :label="label" />
-    <div class="flex items-center mt-1 space-x-2">
+    <FormLabel v-if="label" :required="required" :label="label" />
+    <div class="flex items-center space-x-2" :class="{ 'mt-1': label }">
       <select
         :id="`form--${name}`"
         v-model="model"
@@ -22,92 +22,64 @@
   </label>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import FormLabel from "./FormLabel.vue";
 import FormHelptext from "./FormHelptext.vue";
-import { defineComponent, PropType } from "vue";
+import { computed } from "vue";
 import { FormOptionInput } from "../types/form";
 
-type FormOption = { name: string; value: string | null };
+type FormOption = { name: string; value: string | null | undefined };
 
-export default defineComponent({
-  components: {
-    FormHelptext,
-    FormLabel,
+const props = defineProps<{
+  label?: string;
+  helptext?: string;
+  modelValue?: string | number | boolean;
+  name?: string;
+  options?: FormOptionInput[] | undefined;
+  required?: boolean;
+}>();
+
+const emit = defineEmits(["update:modelValue"]);
+
+const style = {
+  backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`,
+  backgroundPosition: "right 0.5rem center",
+  backgroundSize: "1.5em 1.5em",
+};
+
+const model = computed({
+  get() {
+    if (props.modelValue) return props.modelValue;
+    return null;
   },
-  props: {
-    label: {
-      required: true,
-      type: String,
-    },
-    helptext: {
-      required: false,
-      default: "",
-      type: String,
-    },
-    modelValue: {
-      required: false,
-      default: "",
-      type: [String, Number, Boolean],
-    },
-    name: {
-      required: false,
-      type: String,
-      default: "",
-    },
-    options: {
-      required: false,
-      type: Array as PropType<FormOptionInput[] | undefined>,
-      default: () => [],
-    },
-    required: {
-      required: false,
-      default: false,
-      type: Boolean,
-    },
+  set(newValue: string | boolean | null) {
+    emit("update:modelValue", newValue);
   },
-  emits: ["update:modelValue"],
-  computed: {
-    style() {
+});
+
+const formOptions = computed<FormOption[]>(() => {
+  if (!props.options) return [];
+  return props.options.map((o: FormOptionInput) => {
+    if (typeof o === "string")
       return {
-        backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`,
-        backgroundPosition: "right 0.5rem center",
-        backgroundSize: "1.5em 1.5em",
+        name: o,
+        value: o,
       };
-    },
-    model: {
-      get() {
-        if (this.modelValue) return this.modelValue;
-        return null;
-      },
-      set(newValue: string | boolean | null) {
-        this.$emit("update:modelValue", newValue);
-      },
-    },
-    formOptions(): FormOption[] {
-      if (!this.options) return [];
-      return this.options.map((o: FormOptionInput) => {
-        if (typeof o === "string")
-          return {
-            name: o,
-            value: o,
-          };
-        else {
-          let value = "-";
-          if (o.value) value = String(o.value);
-          else if (o.id) value = String(o.id);
-          else if (o.uuid) value = String(o.uuid);
-          return {
-            name: o.name || "-",
-            value: value,
-          };
-        }
-      });
-    },
-    internalOptions(): FormOption[] {
-      if (this.required) return this.formOptions;
-      return [{ name: "------", value: null }, ...this.formOptions];
-    },
-  },
+    else {
+      let value: string | undefined = undefined;
+      if (o.value) value = String(o.value);
+      else if (o.id) value = String(o.id);
+      else if (o.uuid) value = String(o.uuid);
+      return {
+        name: o.name || "-",
+        value: value,
+      };
+    }
+  });
+});
+
+const internalOptions = computed<FormOption[]>(() => {
+  if (props.required) return formOptions.value;
+  return [{ name: "------", value: null }, ...formOptions.value];
 });
 </script>
