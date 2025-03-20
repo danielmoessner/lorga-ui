@@ -2,10 +2,10 @@
 import FormSelect from "@/components/FormSelect.vue";
 import { ref } from "vue";
 
-const year = ref("");
+const year = ref();
 
 const years = [
-  { name: "Year: All", value: "" },
+  { name: "Year: All", value: undefined },
   { name: "Year: 2021", value: "2021" },
   { name: "Year: 2022", value: "2022" },
   { name: "Year: 2023", value: "2023" },
@@ -17,6 +17,8 @@ const years = [
 <template>
   <div class="max-w-2xl p-64 bg-gray-200">
     <FormSelect v-model="year" :options="years" label="" required />
-    {{ year }}
+    <div class="h-10">
+      {{ year }}
+    </div>
   </div>
 </template>
