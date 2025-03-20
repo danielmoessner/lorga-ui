@@ -25,7 +25,7 @@
 <script lang="ts" setup>
 import FormLabel from "./FormLabel.vue";
 import FormHelptext from "./FormHelptext.vue";
-import { computed, defineModel, toRef } from "vue";
+import { computed, defineModel, toRefs } from "vue";
 import { FormOption, FormOptionInput } from "../types/form";
 import useFormOptions from "@/composables/useFormOptions";
 
@@ -37,6 +37,7 @@ const props = defineProps<{
   options?: FormOptionInput[] | undefined;
   required?: boolean;
 }>();
+const { options, required } = toRefs(props);
 
 const style = {
   backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`,
@@ -46,10 +47,10 @@ const style = {
 
 const model = defineModel<string | boolean | null | undefined>();
 
-const { formOptions } = useFormOptions(toRef(props.options));
+const { formOptions } = useFormOptions(options);
 
 const internalOptions = computed<FormOption[]>(() => {
-  if (props.required) return formOptions.value;
+  if (required.value) return formOptions.value;
   return [{ name: "------", value: null }, ...formOptions.value];
 });
 </script>
