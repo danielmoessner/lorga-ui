@@ -6,7 +6,7 @@
 
 <script setup lang="ts">
 import { setupConfig } from "./config";
-import CP1 from "./views/PropsDestructure.vue";
+import CP1 from "./views/FormGeneratorUpdateTest.vue";
 
 setupConfig();
 </script>

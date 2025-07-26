@@ -25,7 +25,7 @@
 <script lang="ts" setup>
 import FormLabel from "./FormLabel.vue";
 import FormHelptext from "./FormHelptext.vue";
-import { computed, defineModel, toRefs } from "vue";
+import { computed, toRefs } from "vue";
 import { FormOption, FormOptionInput } from "../types/form";
 import useFormOptions from "@/composables/useFormOptions";
 
