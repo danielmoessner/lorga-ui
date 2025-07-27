@@ -31,7 +31,7 @@
 
 <script lang="ts" setup>
 import ButtonNormal from "@/components/ButtonNormal.vue";
-import { ref, toRefs } from "vue";
+import { ref, toRefs, watch } from "vue";
 import { RequestFunction } from "../types/shared";
 import { FormField } from "../types/form";
 import { ICommandError } from "../types/error";
@@ -70,7 +70,13 @@ const getError = (loc: (number | string)[]): string[] => {
   return getNestedValue(errors.value, loc);
 };
 
-internalData.value = Object.assign({}, data.value);
+watch(
+  data, // watch for changes so that if there is some api request to get select options and choose a default value, it will be updated
+  (newData) => {
+    internalData.value = Object.assign({}, newData);
+  },
+  { immediate: true },
+);
 
 const handleSubmit = () => {
   loading.value = true;

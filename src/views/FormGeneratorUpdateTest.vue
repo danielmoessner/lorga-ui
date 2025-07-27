@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, ref } from "vue";
-import FormGenerator from "../components/FormGenerator.vue";
 import { FormField } from "../types/form";
+import ModalCreate from "../components/ModalCreate.vue";
 
 const requestData = ref();
 
@@ -81,24 +81,31 @@ const test = (data, data2) => {
 
 const selected = ref("3");
 const text = ref("Test 01");
-setTimeout(() => {
-  selected.value = "1";
-  text.value = "Test 01 Updated";
-  console.log("selected set to 1");
-}, 1000);
 
 const initial = computed(() => ({
   test01: text.value,
   test12: "2",
   test15: selected.value,
 }));
+
+const open = ref(false);
+const openModal = () => {
+  open.value = true;
+  setTimeout(() => {
+    selected.value = "1";
+    text.value = "Test 01 Updated";
+    console.log("selected set to 1");
+  }, 1000);
+};
 </script>
 
 <template>
   <div class="max-w-xl p-20">
     <div>requestData: {{ requestData }}</div>
     <div>initial: {{ initial }}</div>
-    <FormGenerator
+    <button @click="openModal">Open Modal</button>
+    <ModalCreate
+      v-model="open"
       :fields="fields"
       :request="request"
       :data="initial"
