@@ -25,7 +25,8 @@
     "./style.css": {
       "import": "./dist/style.css",
       "require": "./dist/style.css"
-    }
+    },
+    "./tailwind.config.js": "./tailwind.config.js"
   },
   "files": [
     "dist"
@@ -40,13 +41,14 @@
   "peerDependencies": {
     "@headlessui/vue": "1.x",
     "@heroicons/vue": "2.x",
-    "@tailwindcss/cli": "^4.1.12",
-    "tailwindcss": "^4.1.12",
+    "@tailwindcss/cli": "4.x",
+    "@tailwindcss/vite": "4.x",
+    "@tailwindcss/typography": "0.x",
+    "tailwindcss": "4.x",
     "vue": ">=3.4",
     "vue-router": "4.x"
   },
   "devDependencies": {
-    "@tailwindcss/typography": "==0.*",
     "@types/jest": "==30.*",
     "@types/node": "==24.*",
     "@typescript-eslint/eslint-plugin": "==8.*",
@@ -64,7 +66,7 @@
     "typescript-eslint": "^8.26.0",
     "vite": "==6.*",
     "vite-bundle-visualizer": "==1.*",
-    "vitepress": "==1.*",
+    "vitepress": "==2.*",
     "vitest": "==3.*",
     "vue-tsc": "==3.*"
   },

@@ -1,1 +1,60 @@
 @import 'tailwindcss';
+
+@theme {
+  --color-formcolor: #003c4d;
+  
+  --color-blue-50: #eff9fb;
+  --color-blue-100: #d0e7ed;
+  --color-blue-200: #aad0db;
+  --color-blue-300: #8abbc9;
+  --color-blue-400: #6ca7b7;
+  --color-blue-500: #428193;
+  --color-blue-600: #275f6f;
+  --color-blue-700: #153f4b;
+  --color-blue-800: #0a2027;
+  --color-blue-900: #010203;
+}
+
+@plugin "@tailwindcss/typography";
+
+@layer utilities {
+  .prose table {
+    @apply border-collapse;
+  }
+  
+  .prose thead {
+    border: none;
+  }
+  
+  .prose tr {
+    border: none;
+  }
+  
+  .prose tr:last-child {
+    border-bottom-width: 0;
+  }
+  
+  .prose th {
+    vertical-align: bottom;
+    border-width: 2px;
+    border-color: var(--color-gray-400);
+    background-color: var(--color-gray-200);
+    padding: 4px 8px;
+  }
+  
+  .prose th > p,
+  .prose td > p {
+    margin: 0;
+  }
+  
+  .prose td {
+    vertical-align: top;
+    border-width: 2px;
+    border-color: var(--color-gray-300);
+    background-color: var(--color-gray-100);
+  }
+  
+  .prose tbody td:first-child {
+    padding-left: auto;
+  }
+}

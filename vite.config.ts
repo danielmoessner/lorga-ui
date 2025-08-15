@@ -3,6 +3,7 @@ import { defineConfig } from "vite";
 import vue from '@vitejs/plugin-vue'
 import dns from "dns";
 import { resolve } from 'path';
+import tailwindcss from "@tailwindcss/vite";
 
 // sets localhost as default instead of 127.0.0.1
 dns.setDefaultResultOrder("verbatim");
@@ -39,6 +40,7 @@ export default defineConfig({
   },
   plugins: [   
     vue(), 
+    tailwindcss(),
     // visualizer({template: 'sunburst'}),
   ],
   resolve: {

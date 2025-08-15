@@ -12,7 +12,7 @@
             leave-from="opacity-100"
             leave-to="opacity-0"
           >
-            <DialogOverlay class="fixed inset-0 bg-gray-800 bg-opacity-40" />
+            <DialogOverlay class="fixed inset-0 bg-gray-800/40" />
           </TransitionChild>
 
           <span class="inline-block h-screen align-middle" aria-hidden="true">
@@ -29,7 +29,7 @@
             leave-to="opacity-0 scale-95"
           >
             <div
-              class="inline-block w-full p-6 my-8 text-left align-middle transition-all transform bg-white rounded-md shadow-xl"
+              class="relative inline-block w-full p-6 my-8 text-left align-middle transition-all transform bg-white rounded-md shadow-xl"
               :class="[width]"
             >
               <div class="absolute top-0 right-0 block pt-3 pr-3">

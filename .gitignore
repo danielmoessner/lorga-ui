@@ -50,3 +50,4 @@ yarn-error.log*
 .temp
 .cache
 dist
+docs/.vitepress/cache/*

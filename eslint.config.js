@@ -16,6 +16,9 @@ export default defineConfig([
       globals: {
         browser: true,
         node: true,
+        console: "readonly",
+        window: "readonly",
+        document: "readonly",
       },
       parser: vueParser,
       parserOptions: {

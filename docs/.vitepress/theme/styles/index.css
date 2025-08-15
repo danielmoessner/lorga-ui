@@ -1,8 +1,6 @@
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
-
-/* @import './prism.css'; */
+@import "tailwindcss";
+/* @import "tailwindcss/components";
+@import "tailwindcss/utilities"; */
 
 @import './code.css';
 
@@ -13,3 +11,8 @@
 @import './progress.postcss';
 
 @import './scroll.postcss';
+
+@plugin "@tailwindcss/typography";
+
+/* @import './prism.css'; */
+

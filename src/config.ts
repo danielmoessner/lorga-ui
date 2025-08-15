@@ -10,7 +10,7 @@ export const DEFAULT_CONFIG = {
   button: {
     primary: {
       color:
-        "border shadow-sm border-transparent text-white bg-formcolor bg-opacity-100 hover:bg-opacity-90 focus:ring-2 focus:ring-offset-2 focus:ring-formcolor",
+        "border shadow-sm border-transparent text-white bg-formcolor hover:bg-formcolor/90 focus:ring-2 focus:ring-offset-2 focus:ring-formcolor",
       size: "px-4 py-2 text-sm font-medium rounded-xl",
     },
     secondary: {

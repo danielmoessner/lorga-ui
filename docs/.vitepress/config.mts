@@ -1,9 +1,12 @@
-export default {
+import tailwindcss from '@tailwindcss/vite';
+import path from 'path';
+import {defineConfig} from 'vitepress';
+
+export default defineConfig({
   lang: "en-US",
   title: "Lorga UI",
   description: "Reusable components for your Vue3 frontend.",
   themeConfig: {
-    title: "Lorga UI",
     sidebar: [
       {
         text: "Getting Started",
@@ -23,4 +26,14 @@ export default {
       },
     ],
   },
-};
+  vite: {
+    resolve: {
+      alias: {
+        '@': path.resolve(__dirname, '../../src')
+      }
+    },
+    plugins: [
+      tailwindcss()
+    ]
+  }
+});
