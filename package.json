@@ -10,7 +10,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && vue-tsc --emitDeclarationOnly && mv dist/src dist/types",
+    "build": "vite build && vue-tsc --emitDeclarationOnly && mv dist/src dist/types && cp src/theme.css dist/theme.css",
     "publish-to-npm": "vitest run && npm run build && npm version patch && npm publish",
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
@@ -22,11 +22,8 @@
       "types": "./dist/types/index.d.ts",
       "require": "./dist/umd.js"
     },
-    "./style.css": {
-      "import": "./dist/style.css",
-      "require": "./dist/style.css"
-    },
-    "./tailwind.config.js": "./tailwind.config.js"
+    "./style.css": "./dist/style.css",
+    "./theme.css": "./dist/theme.css"
   },
   "files": [
     "dist"
