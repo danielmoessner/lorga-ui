@@ -40,8 +40,8 @@
   "peerDependencies": {
     "@headlessui/vue": "1.x",
     "@heroicons/vue": "2.x",
-    "@tailwindcss/cli": "4.x",
-    "tailwindcss": "4.x",
+    "@tailwindcss/cli": "^4.1.12",
+    "tailwindcss": "^4.1.12",
     "vue": ">=3.4",
     "vue-router": "4.x"
   },

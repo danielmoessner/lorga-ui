@@ -6,7 +6,7 @@
           v-model="model"
           type="checkbox"
           :name="name"
-          class="w-4 h-4 border border-gray-300 rounded appearance-none checked:bg-formcolor text-formcolor focus:ring-[2px] focus:ring-offset-1 focus:ring-formcolor checked:border-formcolor"
+          class="w-4 h-4 border border-gray-300 rounded appearance-none checked:bg-formcolor text-formcolor focus:ring-2 focus:ring-offset-1 focus:ring-formcolor checked:border-formcolor"
         />
         <span class="ml-2">{{ label }}</span>
       </label>

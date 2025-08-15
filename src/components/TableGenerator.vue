@@ -73,7 +73,7 @@ const innerLoading = computed(() => {
         <template v-for="item in computedHead" :key="item.name">
           <TableHeader
             :class="{
-              'text-right md:sticky right-0 space-x-3 md:!border-l-0':
+              'text-right md:sticky right-0 space-x-3 md:border-l-0!':
                 item.key === 'action',
             }"
           >
@@ -82,7 +82,7 @@ const innerLoading = computed(() => {
             </slot>
             <div
               v-if="item.key === 'action'"
-              class="hidden md:block absolute top-0 bottom-0 left-0 w-px h-full bg-gray-200 !m-0"
+              class="hidden md:block absolute top-0 bottom-0 left-0 w-px h-full bg-gray-200 m-0!"
             ></div>
           </TableHeader>
         </template>
@@ -111,7 +111,7 @@ const innerLoading = computed(() => {
             </slot>
             <div
               v-if="headItem.key === 'action'"
-              class="hidden md:block absolute top-0 bottom-0 left-0 w-px h-full bg-gray-100 !m-0"
+              class="hidden md:block absolute top-0 bottom-0 left-0 w-px h-full bg-gray-100 m-0!"
             ></div>
           </TableData>
         </template>
@@ -123,7 +123,7 @@ const innerLoading = computed(() => {
       </TableRow>
       <TableRow v-if="showTotal">
         <TableData :colspan="head.length - 1" />
-        <TableData class="text-right !py-2.5 md:sticky right-0">
+        <TableData class="text-right py-2.5! md:sticky right-0">
           <span v-if="!innerLoading && data">{{ data.length }} Total</span>
           <span v-else>Loading...</span>
         </TableData>

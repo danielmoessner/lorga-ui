@@ -6,7 +6,7 @@
   >
     <div class="p-4" :class="{ 'py-3.5': !alert.message }">
       <div class="flex items-start">
-        <div class="flex-shrink-0">
+        <div class="shrink-0">
           <CheckCircleIcon
             v-if="alert.type === 'success'"
             class="w-6 h-6 text-green-400"
@@ -32,7 +32,7 @@
             {{ alert.message }}
           </p>
         </div>
-        <div class="flex flex-shrink-0 ml-4">
+        <div class="flex shrink-0 ml-4">
           <button
             class="relative bg-white p-0.5 rounded-md inline-flex text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:bg-gray-100 focus:ring-gray-200"
             @click="close()"

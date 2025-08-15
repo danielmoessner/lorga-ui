@@ -85,19 +85,19 @@ function change() {
               v-model="value[key]"
               :name="name"
               type="text"
-              class="flex-grow block w-full px-3 py-2 placeholder-gray-400 border border-gray-300 rounded-md shadow-sm appearance-none focus:outline-none focus:ring-formcolor focus:border-formcolor focus:ring-1 sm:text-sm"
+              class="grow block w-full px-3 py-2 placeholder-gray-400 border border-gray-300 rounded-md shadow-sm appearance-none focus:outline-none focus:ring-formcolor focus:border-formcolor focus:ring-1 sm:text-sm"
               @change="change()"
             />
             <button
               type="button"
-              class="flex-shrink-0 p-1 border border-gray-300 rounded-md hover:bg-gray-100 focus:outline-none focus:ring-1 focus:ring-formcolor focus:border-formcolor"
+              class="shrink-0 p-1 border border-gray-300 rounded-md hover:bg-gray-100 focus:outline-none focus:ring-1 focus:ring-formcolor focus:border-formcolor"
               @click="up(key)"
             >
               <ArrowSmallUpIcon class="w-6 h-6" />
             </button>
             <button
               type="button"
-              class="flex-shrink-0 p-1 border border-gray-300 rounded-md hover:bg-gray-100 focus:outline-none focus:ring-1 focus:ring-formcolor focus:border-formcolor"
+              class="shrink-0 p-1 border border-gray-300 rounded-md hover:bg-gray-100 focus:outline-none focus:ring-1 focus:ring-formcolor focus:border-formcolor"
               @click="remove(key)"
             >
               <XMarkIcon class="w-6 h-6" />
@@ -113,7 +113,7 @@ function change() {
         </div>
         <button
           type="button"
-          class="flex-shrink-0 p-1 border border-gray-300 rounded-md hover:bg-gray-100 focus:outline-none focus:ring-1 focus:ring-formcolor focus:border-formcolor"
+          class="shrink-0 p-1 border border-gray-300 rounded-md hover:bg-gray-100 focus:outline-none focus:ring-1 focus:ring-formcolor focus:border-formcolor"
           @click="add()"
         >
           <PlusIcon class="w-6 h-6" />
