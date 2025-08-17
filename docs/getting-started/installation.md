@@ -6,7 +6,7 @@ npm install lorga-ui
 
 You also need to install the peer dependencies:
 ```sh
-npm install @headlessui/vue @heroicons/vue vue
+npm install @headlessui/vue @heroicons/vue vue tailwindcss
 ```
 
 You also need the additional Tailwind CSS Typography package:

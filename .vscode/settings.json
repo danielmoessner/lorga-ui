@@ -1,16 +1,20 @@
 {
-    "eslint.validate": ["vue", "javascript", "typescript"],
-    "editor.codeActionsOnSave": {
-      "source.fixAll": "explicit"
-    },
-    "editor.quickSuggestions": {
-      "other": true,
-      "comments": false,
-      "strings": true
-    },
-    "tailwindCSS.emmetCompletions": true,
-    "emmet.includeLanguages": {
-      "edge": "html",
-      "vue-html": "html",
-    }
+  "eslint.validate": ["vue", "javascript", "typescript"],
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "explicit"
+  },
+  "editor.quickSuggestions": {
+    "other": true,
+    "comments": false,
+    "strings": true
+  },
+  "tailwindCSS.emmetCompletions": true,
+  "emmet.includeLanguages": {
+    "edge": "html",
+    "vue-html": "html"
+  },
+  "files.associations": {
+    "**/src/theme.css": "tailwindcss",
+    "**/src/main.css": "tailwindcss"
   }
+}
