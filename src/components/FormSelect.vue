@@ -29,10 +29,12 @@ import { computed, toRefs } from "vue";
 import { FormOption, FormOptionInput } from "../types/form";
 import useFormOptions from "@/composables/useFormOptions";
 
+type ModelValue = FormOption["value"];
+
 const props = defineProps<{
   label?: string;
   helptext?: string;
-  modelValue?: string | number | boolean;
+  modelValue?: ModelValue;
   name?: string;
   options?: FormOptionInput[] | undefined;
   required?: boolean;
@@ -45,7 +47,7 @@ const style = {
   backgroundSize: "1.5em 1.5em",
 };
 
-const model = defineModel<string | boolean | null | undefined>();
+const model = defineModel<ModelValue>();
 
 const { formOptions } = useFormOptions(options);
 
