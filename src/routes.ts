@@ -5,6 +5,7 @@ import ModalCreate from "./app/ModalCreate.vue";
 import { RouteRecordRaw } from "vue-router";
 import FormListTest from "./app/FormListTest.vue";
 import TableGenerator from "./app/TableGenerator.vue";
+import OtherStuff from "./app/OtherStuff.vue";
 
 export const routes: RouteRecordRaw[] = [
   { path: "", component: FormGeneratorUpdateTest },
@@ -27,6 +28,11 @@ export const routes: RouteRecordRaw[] = [
     path: "/tables/table",
     component: TableGenerator,
     meta: { name: "Table" },
+  },
+  {
+    path: "/other",
+    component: OtherStuff,
+    meta: { name: "OtherStuff" },
   },
   { path: "/:pathMatch(.*)*", component: () => h("NotFound") },
 ];

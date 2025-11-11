@@ -36,6 +36,16 @@ const fields: FormField[] = [
     required: true,
   },
   {
+    name: "Select",
+    label: "Select",
+    type: "select",
+    required: true,
+    options: [
+      { id: 1, name: "Option 1" },
+      { id: 2, name: "Option 2" },
+    ],
+  },
+  {
     name: "nested",
     type: "fields",
     fields: [
