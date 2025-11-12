@@ -1,5 +1,5 @@
 <template>
-  <label :for="name" class="relative block">
+  <label :for="`form--${name}`" class="relative block">
     <FormLabel v-if="label" :required="required" :label="label" />
     <div class="flex items-center space-x-2" :class="{ 'mt-1': label }">
       <select
