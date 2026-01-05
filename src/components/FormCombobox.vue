@@ -31,53 +31,51 @@
             <ComboboxOptions
               :static="true"
               :unmount="false"
-              class="absolute w-full py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+              class="absolute z-10 w-full py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
             >
-              <ul>
-                <li
-                  v-if="filteredOptions.length === 0 && query !== ''"
-                  class="relative px-4 py-2 text-gray-700 cursor-default select-none"
-                >
-                  Nothing found.
-                </li>
+              <li
+                v-if="filteredOptions.length === 0 && query !== ''"
+                class="relative px-4 py-2 text-gray-700 cursor-default select-none"
+              >
+                Nothing found.
+              </li>
 
-                <ComboboxOption
-                  v-for="option in filteredOptions"
-                  :key="`${option.name}${option.value}`"
-                  v-slot="{ selected, active }"
-                  as="template"
-                  :value="option.value"
-                  @click="optionClicked(open)"
+              <ComboboxOption
+                v-for="option in filteredOptions"
+                :key="`${option.name}${option.value}`"
+                v-slot="{ selected, active }"
+                as="template"
+                :value="option.value"
+                @click="optionClicked(open)"
+              >
+                <li
+                  class="relative py-2 pl-10 pr-4 cursor-pointer select-none"
+                  :class="{
+                    'bg-formcolor text-white': active,
+                    'text-gray-900': !active,
+                  }"
                 >
-                  <li
-                    class="relative py-2 pl-10 pr-4 cursor-pointer select-none"
+                  <span
+                    class="block truncate"
                     :class="{
-                      'bg-formcolor text-white': active,
-                      'text-gray-900': !active,
+                      'font-medium': selected,
+                      'font-normal': !selected,
                     }"
                   >
-                    <span
-                      class="block truncate"
-                      :class="{
-                        'font-medium': selected,
-                        'font-normal': !selected,
-                      }"
-                    >
-                      {{ option.name }}
-                    </span>
-                    <span
-                      v-show="selected"
-                      class="absolute inset-y-0 left-0 flex items-center pl-3"
-                      :class="{
-                        'text-white': active,
-                        'text-formcolor': !active,
-                      }"
-                    >
-                      <CheckIcon class="w-5 h-5" aria-hidden="true" />
-                    </span>
-                  </li>
-                </ComboboxOption>
-              </ul>
+                    {{ option.name }}
+                  </span>
+                  <span
+                    v-show="selected"
+                    class="absolute inset-y-0 left-0 flex items-center pl-3"
+                    :class="{
+                      'text-white': active,
+                      'text-formcolor': !active,
+                    }"
+                  >
+                    <CheckIcon class="w-5 h-5" aria-hidden="true" />
+                  </span>
+                </li>
+              </ComboboxOption>
             </ComboboxOptions>
           </TransitionRoot>
         </div>
