@@ -16,7 +16,7 @@ const setQueryParam = (key, value) => {
 </script>
 
 <template>
-  <div class="p-10 bg-gray-900">
+  <div class="p-10 bg-gray-500">
     <PaginationBar
       :total="data.total"
       :set-query-param="setQueryParam"

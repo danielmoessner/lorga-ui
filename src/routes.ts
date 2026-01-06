@@ -6,6 +6,7 @@ import { RouteRecordRaw } from "vue-router";
 import FormListTest from "./app/FormListTest.vue";
 import TableGenerator from "./app/TableGenerator.vue";
 import OtherStuff from "./app/OtherStuff.vue";
+import PaginationTest from "./app/PaginationTest.vue";
 
 export const routes: RouteRecordRaw[] = [
   { path: "", component: FormGeneratorUpdateTest },
@@ -33,6 +34,11 @@ export const routes: RouteRecordRaw[] = [
     path: "/other",
     component: OtherStuff,
     meta: { name: "OtherStuff" },
+  },
+  {
+    path: "/pagination/test",
+    component: PaginationTest,
+    meta: { name: "PaginationTest" },
   },
   { path: "/:pathMatch(.*)*", component: () => h("NotFound") },
 ];

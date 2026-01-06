@@ -28,7 +28,7 @@ const modelValue = computed({
         id="pagination-bar-per-page"
         v-model="modelValue"
         name="perPage"
-        class="block w-full pl-5 pr-2 border rounded-md text-slate-900 focus:outline-none focus:ring-0"
+        class="block w-full pl-5 pr-2 border rounded-md border-gray-200 text-slate-900 focus:outline-none focus:ring-0"
       >
         <option>10</option>
         <option>20</option>

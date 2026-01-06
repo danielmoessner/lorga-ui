@@ -20,7 +20,7 @@
         id="pagination-bar-which-page"
         v-model="model"
         name="perPage"
-        class="block w-full px-2 text-center appearance-none text-slate-500 focus:outline-none focus:ring-0"
+        class="block w-full px-2 text-center appearance-none bg-white text-slate-500 focus:outline-none focus:ring-0"
       >
         <option v-for="p in pages" :key="p" :value="p">{{ p }}</option>
       </select>
