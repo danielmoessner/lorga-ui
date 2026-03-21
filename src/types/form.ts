@@ -89,6 +89,19 @@ type SingleCheckboxField = {
   helptext?: string;
 };
 
+type SliderField = {
+  type: "slider";
+  name: string;
+  label: string;
+  min: number;
+  max: number;
+  step: number;
+  helptext?: string;
+  required?: boolean;
+  disabled?: boolean;
+  unit?: string;
+};
+
 export type FormField =
   | InputField
   | OptionsField
@@ -96,4 +109,5 @@ export type FormField =
   | SlotField
   | ArrayField
   | DataListField
-  | SingleCheckboxField;
+  | SingleCheckboxField
+  | SliderField;

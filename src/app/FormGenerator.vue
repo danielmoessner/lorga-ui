@@ -36,6 +36,16 @@ const fields: FormField[] = [
     required: true,
   },
   {
+    name: "slider",
+    label: "Slider",
+    type: "slider",
+    required: true,
+    min: 0,
+    max: 100,
+    step: 1,
+    unit: " %",
+  },
+  {
     name: "Select",
     label: "Select",
     type: "select",
@@ -87,7 +97,7 @@ const test = (data, data2) => {
 </script>
 
 <template>
-  <div class="max-w-xl p-20">
+  <div class="max-w-xl p-20 bg-white">
     <div>requestData: {{ requestData }}</div>
     <FormGenerator :fields="fields" :request="request" @success="test" />
   </div>

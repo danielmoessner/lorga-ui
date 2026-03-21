@@ -9,6 +9,7 @@ import FormToggle from "./FormToggle.vue";
 import FormFile from "./FormFile.vue";
 import FormCombobox from "./FormCombobox.vue";
 import FormCheckbox from "./FormCheckbox.vue";
+import FormSlider from "./FormSlider.vue";
 import FormFiles from "./FormFiles.vue";
 import { computed, toRefs } from "vue";
 import FormSearchSelect from "./FormSearchSelect.vue";
@@ -188,6 +189,20 @@ const nestedGetError = (field: string) => {
         :options="field.options"
         :required="field.required"
         :helptext="field.helptext"
+        @update:model-value="onUpdate([field.name], $event)"
+      />
+      <FormSlider
+        v-else-if="field.type === 'slider'"
+        :model-value="internalData[field.name]"
+        :label="field.label"
+        :name="field.name"
+        :min="field.min"
+        :max="field.max"
+        :step="field.step"
+        :required="field.required"
+        :helptext="field.helptext"
+        :disabled="field.disabled"
+        :unit="field.unit"
         @update:model-value="onUpdate([field.name], $event)"
       />
       <div v-else-if="field.type === 'hidden'" class="hidden">
