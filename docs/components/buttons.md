@@ -2,7 +2,7 @@
 import ButtonNormal from '../../src/components/ButtonNormal.vue';
 </script>
 
-# Buttons 
+# Buttons
 
 ## ButtonNormal.vue
 

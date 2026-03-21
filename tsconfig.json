@@ -11,7 +11,7 @@
     "paths": {
       "@/*": ["./src/*"]
     },
-    "strict": true,      
+    "strict": true,
     "noImplicitReturns": false,
     "noFallthroughCasesInSwitch": true,
     "downlevelIteration": true,
@@ -26,14 +26,12 @@
     "isolatedModules": true,
     "noImplicitAny": false
   },
-  "include": [
-    "src"
-  ],
+  "include": ["src"],
   "exclude": [
-    "node_modules", 
-    "dist", 
-    "docs/.vuepress/dist", 
-    "docs/.vuepress/.temp", 
+    "node_modules",
+    "dist",
+    "docs/.vuepress/dist",
+    "docs/.vuepress/.temp",
     "docs/.vuepress/.cache",
     "docs"
   ]

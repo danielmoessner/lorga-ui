@@ -1,6 +1,6 @@
-import tailwindcss from '@tailwindcss/vite';
-import path from 'path';
-import {defineConfig} from 'vitepress';
+import tailwindcss from "@tailwindcss/vite";
+import path from "path";
+import { defineConfig } from "vitepress";
 
 export default defineConfig({
   lang: "en-US",
@@ -29,11 +29,9 @@ export default defineConfig({
   vite: {
     resolve: {
       alias: {
-        '@': path.resolve(__dirname, '../../src')
-      }
+        "@": path.resolve(__dirname, "../../src"),
+      },
     },
-    plugins: [
-      tailwindcss()
-    ]
-  }
+    plugins: [tailwindcss()],
+  },
 });

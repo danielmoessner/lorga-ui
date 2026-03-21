@@ -1,0 +1,10 @@
+{
+  "$schema": "./node_modules/oxfmt/configuration_schema.json",
+  "trailingComma": "all",
+  "singleQuote": false,
+  "semi": true,
+  "htmlWhitespaceSensitivity": "ignore",
+  "printWidth": 80,
+  "sortPackageJson": false,
+  "ignorePatterns": []
+}

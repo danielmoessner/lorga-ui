@@ -1,3 +1,5 @@
+import typography from "@tailwindcss/typography";
+
 const round = (num) =>
   num
     .toFixed(7)
@@ -66,6 +68,6 @@ export default function getTailwindConfig(content: string[]) {
         }),
       },
     },
-    plugins: [require("@tailwindcss/typography")],
+    plugins: [typography],
   };
 }

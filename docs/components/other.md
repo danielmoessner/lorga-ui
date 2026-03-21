@@ -8,7 +8,6 @@ import CircleLoader from '../../src/components/CircleLoader.vue';
 
 <circle-loader />
 
-
 ### Code
 
 ```vue
@@ -48,5 +47,4 @@ export default defineComponent({
   },
 });
 </script>
-
 ```

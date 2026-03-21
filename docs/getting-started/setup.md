@@ -9,16 +9,14 @@ In total you need four plugins. The first one is `Headwind` which puts TailwindC
 You can put all those plugins into the `.vscode/extensions.json` file. Afterwards VSCode will probably ask, if you want to install those plugins and you can just it yes. That happens to everybody when they open the project and don't have all of those plugins installed. Therefore you want to check this file into version control.
 
 ```json
-
 {
   "recommendations": [
-    "johnsoncodehk.volar", 
-    "johnsoncodehk.vscode-typescript-vue-plugin", 
-    "dbaeumer.vscode-eslint", 
+    "johnsoncodehk.volar",
+    "johnsoncodehk.vscode-typescript-vue-plugin",
+    "dbaeumer.vscode-eslint",
     "heybourn.headwind"
   ]
 }
-
 ```
 
 ## TSConfig Setup
@@ -39,11 +37,9 @@ You can probably change a lot within the `tsconfig.json` file and still everythi
     "paths": {
       "@/*": ["./src/*"]
     },
-    "types": [
-      "vite/client"
-    ]
+    "types": ["vite/client"]
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.vue"],
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.vue"]
 }
 ```
 
@@ -51,35 +47,39 @@ All possible options are listed here: [https://www.typescriptlang.org/tsconfig](
 
 ## ESLint Setup
 
-Now comes the most daunting task, which is setting up ESLint. There are a whole lot of guides out there that tell you to install packages that are not meant for normal projects, for example `@vue/eslint-config-typescript`. 
+Now comes the most daunting task, which is setting up ESLint. There are a whole lot of guides out there that tell you to install packages that are not meant for normal projects, for example `@vue/eslint-config-typescript`.
 
 The following setup is the most simple, that still works. The goal is basically to install the least amount of packages and still get a quite good linting experience that is adapted for Typescript and Vue3. All the docs are linked withing the config file and those docs are also the way how this config was setup. It wasn't setup following a guide but by reading the docs of the ESLint plugins and adding them step by step.
 
 Now, to setup ESLint make sure that you have followed the VSCode setup and install the following packages. If you have `lorga-ui` installed you do not need to install the following packages, because they are included. But this might change in the future, so you might just install them anyway.
 
 Everything ESLint related:
-``` bash
+
+```bash
 npm install eslint
 ```
 
 Everything Typescript related:
-``` bash
+
+```bash
 npm install @typescript-eslint/eslint-plugin
 ```
 
 Everything Vue3 related:
-``` bash
+
+```bash
 npm install eslint-plugin-vue
 ```
 
 Everything Prettier related:
-``` bash
+
+```bash
 npm install eslint-config-prettier eslint-plugin-prettier
 ```
 
-Setup the file `.eslintrc.js` and paste the following content into it. The rules are opinionated you can change them if you want. But you need to keep the error state behind `prettier/prettier` otherwise it will not format your code. 
+Setup the file `.eslintrc.js` and paste the following content into it. The rules are opinionated you can change them if you want. But you need to keep the error state behind `prettier/prettier` otherwise it will not format your code.
 
-``` js
+```js
 module.exports = {
   root: true,
   env: {

@@ -53,7 +53,7 @@ const is = computed(() => {
 });
 
 const attrs = computed(() => {
-  let attrs = {} as { [key: string]: any };  // eslint-disable-line
+  let attrs = {} as { [key: string]: any }; // eslint-disable-line
   if (type.value && is.value === "button") {
     attrs["type"] = type.value;
     attrs["disabled"] = disabledComputed.value;

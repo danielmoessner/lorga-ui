@@ -28,7 +28,6 @@ import { AlertItem } from "../types/alert";
 
 defineProps({
   alerts: {
-    required: true,
     default: () => [],
     type: Array as PropType<AlertItem[]>,
   },

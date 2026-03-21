@@ -5,24 +5,25 @@ npm install lorga-ui
 ```
 
 You also need to install the peer dependencies:
+
 ```sh
 npm install @headlessui/vue @heroicons/vue vue tailwindcss
 ```
 
 You also need the additional Tailwind CSS Typography package:
+
 ```sh
 npm install @tailwindcss/typography
 ```
 
-
 ## Setup
 
-Setup Tailwind CSS according to their [docs](https://tailwindcss.com/docs/installation). 
+Setup Tailwind CSS according to their [docs](https://tailwindcss.com/docs/installation).
 
 LorgaUI requires some theme variables to be set and you also need to include the components as source in your tailwind css config.
 Do this by adding the following lines to your main css file:
 
-``` css
+```css
 @import 'lorga-ui/theme.css';
 @import 'lorga-ui/style.css';
 @source '../node_modules/lorga-ui/dist/es.js';  // ATTENTION: this needs to be relative to your css file and hit the correct file

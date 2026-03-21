@@ -1,8 +1,8 @@
 // import { visualizer } from "rollup-plugin-visualizer";
 import { defineConfig } from "vite";
-import vue from '@vitejs/plugin-vue'
+import vue from "@vitejs/plugin-vue";
 import dns from "dns";
-import { resolve } from 'path';
+import { resolve } from "path";
 import tailwindcss from "@tailwindcss/vite";
 
 // sets localhost as default instead of 127.0.0.1
@@ -19,7 +19,7 @@ export default defineConfig({
       entry: resolve(__dirname, "src/index.ts"),
       name: "lorga-ui",
       fileName: (format) => `${format}.js`,
-      cssFileName: 'style',
+      cssFileName: "style",
     },
     rollupOptions: {
       external: [
@@ -30,7 +30,7 @@ export default defineConfig({
       ],
       output: {
         globals: {
-          "vue": "vue",
+          vue: "vue",
           "@heroicons/vue/24/outline": "@heroicons/vue/24/outline",
           "@heroicons/vue/20/solid": "@heroicons/vue/20/solid",
           "@headlessui/vue": "@headlessui/vue",
@@ -38,8 +38,8 @@ export default defineConfig({
       },
     },
   },
-  plugins: [   
-    vue(), 
+  plugins: [
+    vue(),
     tailwindcss(),
     // visualizer({template: 'sunburst'}),
   ],

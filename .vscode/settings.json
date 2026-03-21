@@ -1,8 +1,7 @@
 {
-  "eslint.validate": ["vue", "javascript", "typescript"],
-  "editor.codeActionsOnSave": {
-    "source.fixAll": "explicit"
-  },
+  "editor.defaultFormatter": "oxc.oxc-vscode",
+  "editor.formatOnSave": true,
+  "editor.formatOnSaveMode": "file",
   "editor.quickSuggestions": {
     "other": true,
     "comments": false,
