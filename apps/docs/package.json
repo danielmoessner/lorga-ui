@@ -1,0 +1,19 @@
+{
+    "name": "@lorga/docs",
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "docs:dev": "vitepress dev .",
+        "docs:build": "vitepress build .",
+        "docs:preview": "vitepress preview ."
+    },
+    "dependencies": {
+        "lorga-ui": "*",
+        "vue": ">=3.4"
+    },
+    "devDependencies": {
+        "@tailwindcss/vite": "4.x",
+        "nprogress": "==0.*",
+        "vitepress": "==1.*"
+    }
+}

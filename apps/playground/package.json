@@ -1,0 +1,21 @@
+{
+    "name": "@lorga/playground",
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build",
+        "preview": "vite preview"
+    },
+    "dependencies": {
+        "lorga-ui": "*",
+        "vue": ">=3.4",
+        "vue-router": "5.x"
+    },
+    "devDependencies": {
+        "@tailwindcss/vite": "4.x",
+        "@vitejs/plugin-vue": "==6.*",
+        "typescript": "==6.*",
+        "vite": "==8.*"
+    }
+}

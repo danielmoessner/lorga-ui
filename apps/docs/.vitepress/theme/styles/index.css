@@ -1,0 +1,13 @@
+@import "tailwindcss";
+
+/* install lorga-ui */
+@source '../../../../dist/es.js';
+@import "../../../../../packages/ui/src/theme.css";
+/* end install */
+
+@import "./code.css";
+@import "./heading.postcss";
+@import "./progress.postcss";
+@import "./scroll.postcss";
+
+@plugin "@tailwindcss/typography";

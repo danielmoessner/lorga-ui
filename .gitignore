@@ -6,6 +6,7 @@ stats.html
 # dependencies
 /node_modules
 /packages/**/node_modules
+/apps/**/node_modules
 
 # testing
 /coverage
@@ -51,3 +52,5 @@ yarn-error.log*
 .cache
 dist
 docs/.vitepress/cache/*
+apps/docs/.vitepress/cache/*
+apps/docs/.vitepress/dist/*

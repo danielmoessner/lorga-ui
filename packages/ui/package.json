@@ -1,0 +1,61 @@
+{
+    "name": "lorga-ui",
+    "description": "Reusable components for your Vue3 frontend.",
+    "version": "2.0.11",
+    "author": "Daniel Mössner",
+    "homepage": "https://github.com/danielmoessner/lorga-ui#readme",
+    "main": "dist/umd.js",
+    "module": "dist/es.js",
+    "typings": "dist/types/index.d.ts",
+    "license": "MIT",
+    "scripts": {
+        "lint": "oxlint src && oxfmt src package.json vite.config.ts vitest.config.ts tsconfig*.json --check",
+        "test": "vitest",
+        "build": "vite build && vue-tsc -p tsconfig.build.json --emitDeclarationOnly && mv dist/src dist/types && cp src/theme.css dist/theme.css",
+        "publish-to-npm": "npm login && npm run test && npm run build && npm version patch && npm publish"
+    },
+    "exports": {
+        ".": {
+            "import": "./dist/es.js",
+            "types": "./dist/types/index.d.ts",
+            "require": "./dist/umd.js"
+        },
+        "./style.css": "./dist/style.css",
+        "./theme.css": "./dist/theme.css"
+    },
+    "files": [
+        "dist"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/danielmoessner/lorga-ui.git"
+    },
+    "bugs": {
+        "url": "https://github.com/danielmoessner/lorga-ui/issues"
+    },
+    "peerDependencies": {
+        "@headlessui/vue": "1.x",
+        "@heroicons/vue": "2.x",
+        "@tailwindcss/typography": "0.x",
+        "tailwindcss": "4.x",
+        "vue": ">=3.4"
+    },
+    "devDependencies": {
+        "@tailwindcss/vite": "4.x",
+        "@types/node": "==26.*",
+        "@vitejs/plugin-vue": "==6.*",
+        "@vue/test-utils": "==2.*",
+        "jsdom": "==29.*",
+        "oxfmt": "==0.*",
+        "oxlint": "==1.*",
+        "typescript": "==6.*",
+        "vite": "==8.*",
+        "vitest": "==4.*",
+        "vue-tsc": "==3.*"
+    },
+    "publishConfig": {
+        "access": "public",
+        "registry": "https://registry.npmjs.org/"
+    },
+    "type": "module"
+}

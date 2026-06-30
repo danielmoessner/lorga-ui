@@ -1,66 +1,17 @@
 {
-  "name": "lorga-ui",
-  "description": "Reusable components for your Vue3 frontend.",
-  "version": "2.0.11",
-  "author": "Daniel Mössner",
-  "homepage": "https://github.com/danielmoessner/lorga-ui#readme",
-  "main": "dist/umd.js",
-  "module": "dist/es.js",
-  "typings": "dist/types/index.d.ts",
-  "license": "MIT",
-  "scripts": {
-    "dev": "vite",
-    "lint": "oxlint . && oxfmt . --check",
-    "test": "vitest",
-    "build": "vite build && vue-tsc -p tsconfig.build.json --emitDeclarationOnly && mv dist/src dist/types && cp src/theme.css dist/theme.css",
-    "publish-to-npm": "npm login && vitest run && npm run build && npm version patch && npm publish",
-    "docs:dev": "vitepress dev docs",
-    "docs:build": "vitepress build docs"
-  },
-  "exports": {
-    ".": {
-      "import": "./dist/es.js",
-      "types": "./dist/types/index.d.ts",
-      "require": "./dist/umd.js"
-    },
-    "./style.css": "./dist/style.css",
-    "./theme.css": "./dist/theme.css"
-  },
-  "files": [
-    "dist"
+  "name": "lorga-ui-workspace",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "apps/*"
   ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/danielmoessner/lorga-ui.git"
-  },
-  "bugs": {
-    "url": "https://github.com/danielmoessner/lorga-ui/issues"
-  },
-  "peerDependencies": {
-    "@headlessui/vue": "1.x",
-    "@heroicons/vue": "2.x",
-    "@tailwindcss/typography": "0.x",
-    "tailwindcss": "4.x",
-    "vue": ">=3.4"
-  },
-  "devDependencies": {
-    "@tailwindcss/vite": "4.x",
-    "@types/jest": "==30.*",
-    "@types/node": "==26.*",
-    "@vitejs/plugin-vue": "==6.*",
-    "@vue/test-utils": "==2.*",
-    "jsdom": "==29.*",
-    "nprogress": "==0.*",
-    "oxfmt": "==0.*",
-    "oxlint": "==1.*",
-    "rollup-plugin-visualizer": "==7.*",
-    "typescript": "==6.*",
-    "vite": "==8.*",
-    "vite-bundle-visualizer": "==1.*",
-    "vitepress": "==1.*",
-    "vitest": "==4.*",
-    "vue-router": "5.x",
-    "vue-tsc": "==3.*"
-  },
-  "type": "module"
+  "scripts": {
+    "dev": "npm run dev -w @lorga/playground",
+    "build": "npm run build -w lorga-ui",
+    "test": "npm run test -w lorga-ui",
+    "lint": "npm run lint -w lorga-ui",
+    "docs:dev": "npm run docs:dev -w @lorga/docs",
+    "docs:build": "npm run docs:build -w @lorga/docs",
+    "publish-to-npm": "npm run publish-to-npm -w lorga-ui"
+  }
 }
