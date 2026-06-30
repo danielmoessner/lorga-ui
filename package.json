@@ -13,7 +13,7 @@
     "lint": "oxlint . && oxfmt . --check",
     "test": "vitest",
     "build": "vite build && vue-tsc -p tsconfig.build.json --emitDeclarationOnly && mv dist/src dist/types && cp src/theme.css dist/theme.css",
-    "publish-to-npm": "vitest run && npm run build && npm version patch && npm publish",
+    "publish-to-npm": "npm login && vitest run && npm run build && npm version patch && npm publish",
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs"
   },
