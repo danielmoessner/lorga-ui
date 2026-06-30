@@ -11,10 +11,5 @@
     "src/types/**/*.ts",
     "src/utils/**/*.ts"
   ],
-  "exclude": [
-    "src/app",
-    "src/tests",
-    "src/main.ts",
-    "src/App.vue"
-  ]
+  "exclude": ["src/app", "src/tests", "src/main.ts", "src/App.vue"]
 }
