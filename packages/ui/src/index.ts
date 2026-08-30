@@ -21,6 +21,8 @@ import FormSelect from "./components/FormSelect.vue";
 import FormTextarea from "./components/FormTextarea.vue";
 import FormCombobox from "./components/FormCombobox.vue";
 import FormSearchSelect from "./components/FormSearchSelect.vue";
+import FormCheckbox from "./components/FormCheckbox.vue";
+import FormSingleCheckbox from "./components/FormSingleCheckbox.vue";
 
 export {
   FormToggle,
@@ -35,6 +37,8 @@ export {
   FormSelect,
   FormTextarea,
   FormCombobox,
+  FormCheckbox,
+  FormSingleCheckbox,
 };
 
 // modals
